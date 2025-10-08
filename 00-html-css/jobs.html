@@ -9,6 +9,8 @@
     />
     <link rel="icon" type="image/x-icon" href="./logo.svg" />
     <link rel="stylesheet" href="./styles.css" />
+
+    <script type="module" src="../01-javascript/script.js"></script>
   </head>
 
   <body>
@@ -18,7 +20,7 @@
         <h1>DevJobs</h1>
         <nav>
           <a href="./index.html">Inicio</a>
-          <a href="">Empleos</a>
+          <a href="#">Empleos</a>
           <a href="">Empresas</a>
           <a href="">Salarios</a>
         </nav>
@@ -103,8 +105,8 @@
         <section class="results">
           <h2>Resultados de búsqueda</h2>
 
-          <div>
-            <a href="">Aplicar</a>
+          <article>
+            <button class="button-apply-job" href="">Aplicar</button>
             <h3>Ingeniero de Software</h3>
             <small>Tech Solutions Inc. | Remoto</small>
             <p>
@@ -113,10 +115,10 @@
               ideal debe ser capaz de trabajar en equipo y tener buenas
               habilidades de comunicación.
             </p>
-          </div>
+          </article>
 
-          <div>
-            <a href="">Aplicar</a>
+          <article>
+            <button class="button-apply-job" href="">Aplicar</button>
             <h3>Analista de Datos</h3>
             <small>Data Driven Co. | Ciudad de México</small>
             <p>
@@ -124,10 +126,10 @@
               de grandes conjuntos de datos y herramientas de visualización. Se
               requiere conocimiento en SQL, Python y R.
             </p>
-          </div>
+          </article>
 
-          <div>
-            <a href="">Aplicar</a>
+          <article>
+            <button class="button-apply-job" href="">Aplicar</button>
             <h3>Desarrollador de Aplicaciones Móviles</h3>
             <small>Mobile Apps Ltd. | Guadalajara</small>
             <p>
@@ -135,10 +137,10 @@
               en iOS y/o Android. El candidato debe tener conocimientos en
               Swift, Kotlin y el desarrollo de interfaces de usuario.
             </p>
-          </div>
+          </article>
 
-          <div>
-            <a href="">Aplicar</a>
+          <article>
+            <button class="button-apply-job" href="">Aplicar</button>
             <h3>Ingeniero de DevOps</h3>
             <small>Cloud Services SA | Remoto</small>
             <p>
@@ -147,11 +149,11 @@
               y herramientas de integración continua. Se requiere conocimiento
               en AWS, Azure o GCP.
             </p>
-          </div>
+          </article>
         </section>
 
         <footer>
-          <div class="paginate">
+          <nav class="pagination">
             <a href="">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -169,7 +171,7 @@
                 <path d="M15 6l-6 6l6 6" />
               </svg>
             </a>
-            <a href="">1</a>
+            <a class="is_active" href="">1</a>
             <a href="">2</a>
             <a href="">3</a>
             <a href="">4</a>
@@ -190,7 +192,7 @@
                 <path d="M9 6l6 6l-6 6" />
               </svg>
             </a>
-          </div>
+          </nav>
         </footer>
       </section>
     </main>
