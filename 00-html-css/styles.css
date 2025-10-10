@@ -337,66 +337,58 @@ h1+p {
         }
     }
 
-    .results {
-        margin-bottom: 2.5rem;
-
+    .results-section {
         h2 {
             margin: 1rem 0;
         }
 
-        article {
-            padding: 1rem 1.5rem;
+        .results {
             border: 1px solid var(--select-bg);
-            border-bottom: none;
-            border-radius: 0;
+            border-radius: 0.5rem;
 
-            &:first-of-type {
-                border-radius: 0.5rem 0.5rem 0 0;
-            }
-
-            &:last-of-type {
-                border-radius: 0 0 0.5rem 0.5rem;
+            article {
+                padding: 1rem 1.5rem;
                 border-bottom: 1px solid var(--select-bg);
-            }
 
-            &:only-child {
-                border-radius: 1rem;
-            }
-
-            h3 {
-                color: var(--text-primary);
-            }
-
-            small {
-                color: var(--text-muted);
-            }
-
-            p {
-                color: var(--text-secondary);
-                margin: 0.5rem 0;
-                width: 100ch;
-            }
-
-            button {
-                float: right;
-                padding: 0.75rem 1.5rem;
-                background: var(--primary);
-                color: var(--text-primary);
-                text-decoration: none;
-                border: 0;
-                border-radius: 0.5rem;
-
-                &:hover,
-                &:focus {
-                    background: var(--primary-hover);
-                    outline: 2px solid var(--text-primary);
-                    outline-offset: 2px;
+                &:last-of-type {
+                    border-bottom: none;
                 }
-            }
 
-            .is-applied {
-                background: #4caf50;
-                pointer-events: none;
+                h3 {
+                    color: var(--text-primary);
+                }
+
+                small {
+                    color: var(--text-muted);
+                }
+
+                p {
+                    color: var(--text-secondary);
+                    margin: 0.5rem 0;
+                    width: 100ch;
+                }
+
+                button {
+                    float: right;
+                    padding: 0.75rem 1.5rem;
+                    background: var(--primary);
+                    color: var(--text-primary);
+                    text-decoration: none;
+                    border: 0;
+                    border-radius: 0.5rem;
+
+                    &:hover,
+                    &:focus {
+                        background: var(--primary-hover);
+                        outline: 2px solid var(--text-primary);
+                        outline-offset: 2px;
+                    }
+                }
+
+                .is-applied {
+                    background: #4caf50;
+                    pointer-events: none;
+                }
             }
         }
     }

@@ -83,73 +83,89 @@
             />
           </form>
 
-          <form role="filter">
-            <select name="technology" id="technology">
+          <form id="filter" role="filter">
+            <select name="technology" id="technology-selector">
               <option value="">Tecnología</option>
+              <option value="azure">Azure</option>
+              <option value="aws">AWS</option>
+              <option value="gcp">GCP</option>
+              <option value="javascript">JavaScript</option>
+              <option value="kotlin">Kotlin</option>
+              <option value="node.js">Node.js</option>
+              <option value="python">Python</option>
+              <option value="react">React</option>
+              <option value="sql">SQL</option>
+              <option value="swift">Swift</option>
             </select>
 
-            <select name="location" id="location">
+            <select name="location" id="location-selector">
               <option value="">Ubicación</option>
+              <option value="méxico">Ciudad de México</option>
+              <option value="guadalajara">Guadalajara</option>
+              <option value="remoto">Remoto</option>
             </select>
 
-            <select name="contract_type" id="contract_type">
+            <select name="contract_type" id="contract_type-selector">
               <option value="">Tipo de contrato</option>
             </select>
 
-            <select name="experience" id="experience">
+            <select name="experience" id="experience-selector">
               <option value="">Nivel de experiencia</option>
             </select>
           </form>
         </section>
 
-        <section class="results">
+        <section class="results-section">
           <h2>Resultados de búsqueda</h2>
 
-          <article>
-            <button class="button-apply-job" href="">Aplicar</button>
-            <h3>Ingeniero de Software</h3>
-            <small>Tech Solutions Inc. | Remoto</small>
-            <p>
-              Buscamos un ingeniero de software con experiencia en desarrollo
-              web y conocimientos en JavaScript, React y Node.js. El candidato
-              ideal debe ser capaz de trabajar en equipo y tener buenas
-              habilidades de comunicación.
-            </p>
-          </article>
+          <div class="results">
+            <article>
+              <button class="button-apply-job" href="">Aplicar</button>
+              <h3>Ingeniero de Software</h3>
+              <small>Tech Solutions Inc. | Remoto</small>
+              <p>
+                Buscamos un ingeniero de software con experiencia en desarrollo
+                web y conocimientos en JavaScript, React y Node.js. El candidato
+                ideal debe ser capaz de trabajar en equipo y tener buenas
+                habilidades de comunicación.
+              </p>
+            </article>
 
-          <article>
-            <button class="button-apply-job" href="">Aplicar</button>
-            <h3>Analista de Datos</h3>
-            <small>Data Driven Co. | Ciudad de México</small>
-            <p>
-              Estamos buscando un analista de datos con experiencia en el manejo
-              de grandes conjuntos de datos y herramientas de visualización. Se
-              requiere conocimiento en SQL, Python y R.
-            </p>
-          </article>
+            <article>
+              <button class="button-apply-job" href="">Aplicar</button>
+              <h3>Analista de Datos</h3>
+              <small>Data Driven Co. | Ciudad de México</small>
+              <p>
+                Estamos buscando un analista de datos con experiencia en el
+                manejo de grandes conjuntos de datos y herramientas de
+                visualización. Se requiere conocimiento en SQL, Python y R.
+              </p>
+            </article>
 
-          <article>
-            <button class="button-apply-job" href="">Aplicar</button>
-            <h3>Desarrollador de Aplicaciones Móviles</h3>
-            <small>Mobile Apps Ltd. | Guadalajara</small>
-            <p>
-              Buscamos un desarrollador de aplicaciones móviles con experiencia
-              en iOS y/o Android. El candidato debe tener conocimientos en
-              Swift, Kotlin y el desarrollo de interfaces de usuario.
-            </p>
-          </article>
+            <article>
+              <button class="button-apply-job" href="">Aplicar</button>
+              <h3>Desarrollador de Aplicaciones Móviles</h3>
+              <small>Mobile Apps Ltd. | Guadalajara</small>
+              <p>
+                Buscamos un desarrollador de aplicaciones móviles con
+                experiencia en iOS y/o Android. El candidato debe tener
+                conocimientos en Swift, Kotlin y el desarrollo de interfaces de
+                usuario.
+              </p>
+            </article>
 
-          <article>
-            <button class="button-apply-job" href="">Aplicar</button>
-            <h3>Ingeniero de DevOps</h3>
-            <small>Cloud Services SA | Remoto</small>
-            <p>
-              Estamos buscando un ingeniero de DevOps con experiencia en la
-              gestión de infraestructuras en la nube, automatización de procesos
-              y herramientas de integración continua. Se requiere conocimiento
-              en AWS, Azure o GCP.
-            </p>
-          </article>
+            <article>
+              <button class="button-apply-job" href="">Aplicar</button>
+              <h3>Ingeniero de DevOps</h3>
+              <small>Cloud Services SA | Remoto</small>
+              <p>
+                Estamos buscando un ingeniero de DevOps con experiencia en la
+                gestión de infraestructuras en la nube, automatización de
+                procesos y herramientas de integración continua. Se requiere
+                conocimiento en AWS, Azure o GCP.
+              </p>
+            </article>
+          </div>
         </section>
 
         <footer>
