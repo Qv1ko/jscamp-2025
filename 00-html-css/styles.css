@@ -165,6 +165,31 @@ h1+p {
         gap: 1rem;
         align-items: center;
 
+        form[role="search"] {
+            padding-inline: 0.5rem;
+            display: flex;
+            align-items: center;
+            color: var(--search-bar);
+            background: var(--search-bar-bg);
+            border-radius: 0.5rem;
+            border: 1px solid var(--search-bar);
+
+            input[type="text"] {
+                flex: 1;
+                background: transparent;
+                border: none;
+                outline: none;
+                color: var(--text-primary);
+                padding: 0.5rem;
+                font-size: 1rem;
+                font-family: inherit;
+
+                &::placeholder {
+                    color: #64748b;
+                }
+            }
+        }
+
         a {
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
@@ -188,6 +213,25 @@ h1+p {
             border-radius: 100%;
             padding: 0;
         }
+    }
+}
+
+.breadcrumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin: 2rem 0;
+
+    span {
+        color: var(--text-muted);
+
+        a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+    }
+
+    span:last-child a {
+        color: var(--text-primary);
     }
 }
 
@@ -433,6 +477,88 @@ h1+p {
     }
 }
 
+.offer-page {
+    max-width: 52rem;
+    margin: 0 auto;
+
+    .offer {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        background: #111825;
+        color: var(--text-primary);
+        border-radius: 0.5rem;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+
+        p,
+        span {
+            color: var(--text-secondary)
+        }
+
+        header {
+            h2 {
+                font-size: 2rem;
+            }
+        }
+
+        section {
+            h3 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        .offer-points {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            div ul {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                list-style: none;
+
+                li {
+                    display: flex;
+                    gap: 0.5rem;
+                    align-items: center;
+
+                    svg {
+                        stroke: var(--primary)
+                    }
+                }
+            }
+        }
+
+        footer {
+            display: flex;
+            justify-content: center;
+
+            button {
+                padding: 0.75rem 1.25rem;
+                border-radius: 0.5rem;
+                background: var(--primary);
+                color: var(--text-primary);
+                box-shadow: 0 1px 8px 0 var(--primary);
+                font-weight: 700;
+                border: none;
+                transition: background-color 0.2s;
+                font-family: inherit;
+
+                &:hover,
+                &:focus {
+                    background: var(--primary-hover);
+                    box-shadow: 0 0 0 0;
+                    outline: 2px solid var(--text-primary);
+                    outline-offset: 2px;
+                }
+            }
+        }
+    }
+}
 
 .cards-section {
     padding-inline: 1rem;
