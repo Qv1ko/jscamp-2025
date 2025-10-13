@@ -399,7 +399,12 @@ h1+p {
                 }
 
                 h3 {
+                    max-width: fit-content;
                     color: var(--text-primary);
+
+                    &:hover {
+                        cursor: pointer;
+                    }
                 }
 
                 small {
