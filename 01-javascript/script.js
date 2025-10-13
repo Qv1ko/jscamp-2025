@@ -11,16 +11,10 @@
 
 const resultsSection = document.querySelector(".results");
 const filterSection = document.getElementById("filter");
+const offerSection = document.getElementById("offer-page");
 
-resultsSection?.addEventListener("click", (event) => {
-  const element = event.target;
-
-  if (element.classList.contains("button-apply-job")) {
-    element.textContent = "¡Aplicado!";
-    element.classList.add("is-applied");
-    element.disabled = true;
-  }
-});
+resultsSection?.addEventListener("click", applyJob);
+offerSection?.addEventListener("click", applyJob);
 
 filterSection?.addEventListener("change", (event) => {
   const element = event.target;
@@ -50,3 +44,15 @@ filterSection?.addEventListener("change", (event) => {
     });
   }
 });
+
+function applyJob(event) {
+  const element = event.target;
+
+  if (element.classList.contains("button-apply-job")) {
+    element.textContent = "¡Aplicado!";
+    element.classList.add("is-applied");
+    element.disabled = true;
+  } else if (element.classList.contains("offer-link")) {
+    window.location.href = "./offer.html";
+  }
+}

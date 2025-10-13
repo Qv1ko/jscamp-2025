@@ -19,6 +19,7 @@
     --icon-bg: rgba(0, 153, 255, 0.3);
     --search-bar-bg: #18212d;
     --select-bg: #242d3a;
+    --applied-bg: #4caf50;
     --card-bg: #1e293b;
     --shadow: rgba(0, 0, 0, 0.3);
     --input-bg: #1e293b;
@@ -435,7 +436,7 @@ h1+p {
                 }
 
                 .is-applied {
-                    background: #4caf50;
+                    background: var(--applied-bg);
                     pointer-events: none;
                 }
             }
@@ -482,7 +483,7 @@ h1+p {
     }
 }
 
-.offer-page {
+#offer-page {
     max-width: 52rem;
     margin: 0 auto;
 
@@ -559,6 +560,12 @@ h1+p {
                     box-shadow: 0 0 0 0;
                     outline: 2px solid var(--text-primary);
                     outline-offset: 2px;
+                }
+
+                &.is-applied {
+                    background: var(--applied-bg);
+                    box-shadow: 0 0 0 0;
+                    pointer-events: none;
                 }
             }
         }
