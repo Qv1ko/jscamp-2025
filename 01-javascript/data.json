@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Ingeniero de Software",
+    "company": "Tech Solutions Inc.",
+    "location": "Remoto",
+    "description": "Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.",
+    "data": {
+      "technologys": ["JavaScript", "React", "Node.js"],
+      "modality": "Remoto",
+      "experience": "3 años"
+    }
+  },
+  {
+    "title": "Analista de Datos",
+    "company": "Data Driven Co.",
+    "location": "Ciudad de México",
+    "description": "Estamos buscando un analista de datos con experiencia en el manejo de grandes conjuntos de datos y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.",
+    "data": {
+      "technologys": ["SQL", "Python", "R"],
+      "modality": "Presencial",
+      "experience": "2 años"
+    }
+  },
+  {
+    "title": "Desarrollador de Aplicaciones Móviles",
+    "company": "Mobile Apps Ltd.",
+    "location": "Guadalajara",
+    "description": "Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.",
+    "data": {
+      "technologys": ["Swift", "Kotlin"],
+      "modality": "Híbrido",
+      "experience": "4 años"
+    }
+  },
+  {
+    "title": "Ingeniero de DevOps",
+    "company": "Cloud Services SA",
+    "location": "Remoto",
+    "description": "Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube, automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure o GCP.",
+    "data": {
+      "technologys": ["AWS", "Azure", "GCP"],
+      "modality": "Remoto",
+      "experience": "5 años"
+    }
+  }
+]
