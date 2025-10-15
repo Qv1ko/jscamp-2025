@@ -433,12 +433,13 @@ h1+p {
                         outline: 2px solid var(--text-primary);
                         outline-offset: 2px;
                     }
+
+                    &.is-applied {
+                        background: var(--applied-bg);
+                        pointer-events: none;
+                    }
                 }
 
-                .is-applied {
-                    background: var(--applied-bg);
-                    pointer-events: none;
-                }
             }
         }
     }
