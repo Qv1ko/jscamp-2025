@@ -17,16 +17,18 @@ class DevJobsAvatar extends HTMLElement {
     const url = this.createUrl(service, username);
 
     this.shadowRoot.innerHTML = `
-    <style>
-      with: ${size}px;
-      height: ${size}px;
-      border-radius: 99999px;
-    </style>
-    <img src="${url}" alt="Avatar de qv1ko" class="avatar">
+      <style>
+        .avatar {
+          width: ${size}px;
+          height: ${size}px;
+          border-radius: 50%;
+        }
+      </style>
+      <img src="${url}" alt="Avatar de ${username}" class="avatar">
     `;
   }
 
-  connectCallback() {
+  connectedCallback() {
     this.render();
   }
 }
