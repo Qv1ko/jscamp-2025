@@ -24,24 +24,25 @@ filterSection?.addEventListener("change", (event) => {
       (child) => child.localName == "article"
     );
 
-    articles.forEach(
-      (article) =>
-        (article.style.display = Array.from(article.children).some((child) =>
-          child.textContent.toLowerCase().includes(element.value.toLowerCase())
-        )
-          ? "block"
-          : "none")
-    );
+    const visibleArticles = articles.filter((article) => {
+      const match = Array.from(article.children).some((child) =>
+        child.textContent.toLowerCase().includes(element.value.toLowerCase())
+      );
 
-    const selectedArticles = articles.filter(
-      (article) => article.style.display == "block"
-    );
-    selectedArticles.forEach((article, i) => {
-      article.style.borderBottom =
-        selectedArticles.length == i + 1
-          ? "none"
-          : "1px solid var(--select-bg)";
+      article.classList.toggle("hidden", !match);
+      return match;
     });
+
+    visibleArticles.forEach((article, i) => {
+      article.classList.toggle(
+        "without-border-bottom",
+        i === visibleArticles.length - 1
+      );
+    });
+
+    articles
+      .filter((article) => article.classList.contains("hidden"))
+      .forEach((article) => article.classList.remove("without-border-bottom"));
   }
 });
 

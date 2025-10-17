@@ -388,7 +388,15 @@ h1+p {
                 border-bottom: 1px solid var(--select-bg);
 
                 &:last-of-type {
-                    border-bottom: none;
+                    border-bottom: 0;
+                }
+
+                &.hidden {
+                    display: none;
+                }
+
+                &.without-border-bottom {
+                    border-bottom: 0;
                 }
 
                 h3 {
@@ -431,7 +439,6 @@ h1+p {
                         pointer-events: none;
                     }
                 }
-
             }
         }
     }
