@@ -5,7 +5,9 @@ const resultsSection = document.querySelector(".results");
 
 searchForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  console.log("submit");
+
+  const search = searchInput.value;
+  if (search) filterTitle(search);
 });
 
 searchInput.addEventListener("input", () =>
@@ -49,3 +51,33 @@ filterSection?.addEventListener("change", (event) => {
 document.addEventListener("keydown", (event) =>
   console.log("Tecla presionada: " + event.key)
 );
+
+function filterTitle(search) {
+  const articles = Array.from(resultsSection.children).filter(
+    (child) => child.localName == "article"
+  );
+
+  const visibleArticles = articles.filter((article) => {
+    const title = Array.from(article.children).find(
+      (child) => child.localName === "h3"
+    );
+
+    const match = title.textContent
+      .toLowerCase()
+      .includes(search.toLowerCase());
+
+    article.classList.toggle("hidden", !match);
+    return match;
+  });
+
+  visibleArticles.forEach((article, i) => {
+    article.classList.toggle(
+      "without-border-bottom",
+      i === visibleArticles.length - 1
+    );
+  });
+
+  articles
+    .filter((article) => article.classList.contains("hidden"))
+    .forEach((article) => article.classList.remove("without-border-bottom"));
+}
