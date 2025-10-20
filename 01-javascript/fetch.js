@@ -6,8 +6,9 @@ fetch("../01-javascript/data.json")
     jobs.forEach((job) => {
       const article = document.createElement("article");
 
-      article.dataset.technology = job.data.technology;
+      article.dataset.technologies = job.data.technologies;
       article.dataset.modality = job.data.modality;
+      article.dataset.contract = job.data.contract;
       article.dataset.experience = job.data.experience;
 
       article.innerHTML = `

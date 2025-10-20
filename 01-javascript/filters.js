@@ -19,17 +19,19 @@ searchInput.addEventListener("blur", () =>
 );
 
 filterSection?.addEventListener("change", (event) => {
-  const element = event.target;
+  const filter = event.target.value;
 
-  if (element.value) {
+  if (filter) {
     const articles = Array.from(resultsSection.children).filter(
       (child) => child.localName == "article"
     );
 
     const visibleArticles = articles.filter((article) => {
-      const match = Array.from(article.children).some((child) =>
-        child.textContent.toLowerCase().includes(element.value.toLowerCase())
-      );
+      const match =
+        article.dataset.technologies?.includes(filter.toLowerCase()) ||
+        article.dataset.modality?.includes(filter.toLowerCase()) ||
+        article.dataset.contract?.includes(filter.toLowerCase()) ||
+        article.dataset.experience?.includes(filter.toLowerCase());
 
       article.classList.toggle("hidden", !match);
       return match;
