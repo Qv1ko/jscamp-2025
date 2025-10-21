@@ -1,4 +1,8 @@
 const container = document.querySelector(".results");
+let articles = [];
+
+const pagination = document.querySelector(".pagination");
+const ARTICLES_PER_PAGE = 5;
 
 fetch("../01-javascript/data.json")
   .then((response) => response.json())
@@ -18,6 +22,31 @@ fetch("../01-javascript/data.json")
         <p>${job.description}</p>
       `;
 
-      container.appendChild(article);
+      articles.push(article);
     });
+
+    paginator(0);
   });
+
+pagination.addEventListener("click", (event) => {
+  const link = event.target.closest("a");
+  if (link) paginator(link.dataset.page);
+});
+
+function paginator(page) {
+  const pages = articles.reduce((acc, value, i) => {
+    if (i % ARTICLES_PER_PAGE === 0) {
+      acc.push([value]);
+    } else {
+      acc[acc.length - 1].push(value);
+    }
+    return acc;
+  }, []);
+
+  const pageIndex = page === undefined ? pages.length - 1 : page;
+
+  if (pageIndex >= 0 && pageIndex < pages.length) {
+    container.innerHTML = "";
+    pages[pageIndex].forEach((article) => container.appendChild(article));
+  }
+}

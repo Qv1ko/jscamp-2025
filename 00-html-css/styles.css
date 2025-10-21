@@ -459,6 +459,7 @@ h1+p {
                 color: var(--text-muted);
                 text-decoration: none;
                 border-radius: 0.375rem;
+                cursor: pointer;
                 transition: all 0.3s;
 
                 &:hover {
