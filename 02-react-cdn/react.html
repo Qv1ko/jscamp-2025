@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>DevJobs - Empleos</title>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="Encuentra los mejores empleos para desarrolladores en DevJobs."
+    />
+    <link rel="icon" type="image/x-icon" href="../00-html-css/logo.svg" />
+    <link rel="stylesheet" href="../00-html-css/styles.css" />
+
+    <script type="module">
+      import React from "https://esm.sh/react?dev";
+      import ReactDOM from "https://esm.sh/react-dom/client?dev";
+      import "../01-javascript/devjobs-avatar-element.js";
+
+      window.React = React;
+      window.ReactDom = ReactDOM;
+    </script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // const title = (
+      //   <h1 style={{ color: "#09f" }}>Hola, bienvenido a React.js!</h1>
+      // );
+
+      // function Hello({ color, name }) {
+      //   return <h2 style={{ color: color }}>Hola, {name}</h2>;
+      // }
+
+      function JobCard({ title, company, location, description, data }) {
+        const [isApplied, setIsApplied] = React.useState(false);
+
+        const numbers = [1, 2, 3, 4, 5];
+        const [firstNumber, , thirdNumber] = numbers;
+
+        function handleClick() {
+          // alert(`Has aplicado al puesto: ${title} en ${company}`);
+          setIsApplied(true);
+        }
+
+        const text = isApplied ? "Aplicado" : "Aplicar";
+        const buttonClass = isApplied ? "is_applied" : "";
+        const isAppliedText = isApplied ? "Sí" : "No";
+
+        return (
+          <article
+            data-technologies={data?.technologies}
+            data-modality={data?.modality}
+            data-contract={data?.contract}
+            data-experience={data?.experience}
+          >
+            <button
+              class={`button-apply-job ${buttonClass}`}
+              disabled={isApplied}
+              onClick={handleClick}
+            >
+              {text}
+            </button>
+            <h3 class="offer-link">{title}</h3>
+            <small>
+              {company} | {location} - ¿He aplicado? {isAppliedText}
+            </small>
+            <p>{description}</p>
+          </article>
+        );
+      }
+
+      function App() {
+        return (
+          // <div>
+          //   <Saludo color="#09f" name="Qv1ko" />
+          //   <Saludo color="red" name="Ana" />
+          //   <Saludo color="#000" name="Luis" />
+          // </div>
+
+          <div class="results">
+            <JobCard
+              title="Desarrollador Frontend React.js"
+              company="Tech Solutions"
+              location="remote"
+              description="Únete a nuestro equipo como Desarrollador Frontend especializado en React.js."
+              data={{
+                technologies: ["react", "js", "html", "css"],
+                modality: "remote",
+                contract: "temporary",
+                experience: "3",
+              }}
+            />
+            <JobCard
+              title="Ingeniero de Software React"
+              company="Innovatech"
+              location="Madrid"
+              description="Buscamos un Ingeniero de Software con experiencia en React para proyectos innovadores."
+              data={{
+                technologies: ["react", "node.js", "ts"],
+                modality: "hyb",
+                contract: "undefined",
+                experience: "5",
+              }}
+            />
+          </div>
+        );
+      }
+
+      const rootEl = document.querySelector("#root");
+      const root = ReactDOM.createRoot(rootEl);
+      root.render(title);
+    </script>
+  </head>
+
+  <body>
+    <header class="logged-header">
+      <div>
+        <img src="../00-html-css/logo.svg" alt="Logo de DevJobs" />
+        <h1>DevJobs</h1>
+        <nav>
+          <a href="./index.html">Inicio</a>
+          <a href="#">Empleos</a>
+          <a href="">Empresas</a>
+          <a href="">Salarios</a>
+        </nav>
+      </div>
+
+      <div>
+        <a href="">Subir CV</a>
+        <devjobs-avatar service="x" username="qv1ko" size="32"></devjobs-avatar>
+      </div>
+    </header>
+
+    <main>
+      <section class="search-section">
+        <header>
+          <h1>React.js, primeros pasos</h1>
+        </header>
+
+        <section class="results-section">
+          <h2>Resultados de búsqueda</h2>
+          <div id="root"></div>
+        </section>
+
+        <footer>
+          <nav class="pagination">
+            <a data-page="0">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M15 6l-6 6l6 6" />
+              </svg>
+            </a>
+            <a class="is_active" data-page="0">1</a>
+            <a data-page="1">2</a>
+            <a data-page="2">3</a>
+            <a data-page="3">4</a>
+            <a data-page="4">5</a>
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 6l6 6l-6 6" />
+              </svg>
+            </a>
+          </nav>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
