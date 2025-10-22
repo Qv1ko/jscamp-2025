@@ -6,7 +6,7 @@
     "description": "Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.",
     "data": {
       "technologies": ["js", "react", "node.js"],
-      "modality": "remoto",
+      "modality": "remote",
       "contract": "temporary",
       "experience": "3"
     }
@@ -42,7 +42,7 @@
     "description": "Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube, automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure o GCP.",
     "data": {
       "technologies": ["aws", "azure", "gcp"],
-      "modality": "remoto",
+      "modality": "remote",
       "contract": "replacement",
       "experience": "5"
     }
@@ -66,7 +66,7 @@
     "description": "Estamos buscando un desarrollador full stack con experiencia en tecnologías front-end y back-end. Se requiere conocimiento en JavaScript, HTML, CSS, Node.js y bases de datos SQL y NoSQL.",
     "data": {
       "technologies": ["js", "html", "css", "node.js", "sql", "nosql"],
-      "modality": "remoto",
+      "modality": "remote",
       "contract": "undefined",
       "experience": "4"
     }
@@ -90,7 +90,7 @@
     "description": "Estamos buscando un científico de datos con experiencia en análisis estadístico, machine learning y visualización de datos. Se requiere conocimiento en Python, R y herramientas como Tableau o Power BI.",
     "data": {
       "technologies": ["python", "r"],
-      "modality": "remoto",
+      "modality": "remote",
       "contract": "temporary",
       "experience": "3"
     }
@@ -114,7 +114,7 @@
     "description": "Estamos buscando un especialista en inteligencia artificial con experiencia en el desarrollo de modelos de machine learning y deep learning. Se requiere conocimiento en Python, TensorFlow y PyTorch.",
     "data": {
       "technologies": ["python"],
-      "modality": "remoto",
+      "modality": "remote",
       "contract": "undefined",
       "experience": "5"
     }
