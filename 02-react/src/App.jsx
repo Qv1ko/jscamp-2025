@@ -3,10 +3,10 @@ function App() {
     <>
       <header className="logged-header">
         <div>
-          <img src="./logo.svg" alt="Logo de DevJobs" />
+          <img src="src/assets/logo.svg" alt="Logo de DevJobs" />
           <h1>DevJobs</h1>
           <nav>
-            <a href="./index.html">Inicio</a>
+            <a href="">Inicio</a>
             <a href="#">Empleos</a>
             <a href="">Empresas</a>
             <a href="">Salarios</a>

@@ -23,6 +23,6 @@ function applyJob(event) {
     element.classList.add("is-applied");
     element.disabled = true;
   } else if (element.classList.contains("offer-link")) {
-    window.location.href = "./offer.html";
+    window.location.href = "../01-javascript/offer.html";
   }
 }
