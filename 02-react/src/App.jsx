@@ -1,3 +1,9 @@
+import { FilterSelector } from "./components/FilterSelector.jsx";
+import { DevJobsAvatar } from "./components/icons/DevJobsAvatar.jsx";
+import { NavLinks } from "./components/NavLinks.jsx";
+import { Pagination } from "./components/Pagination.jsx";
+import { SearchBar } from "./components/SearchBar.jsx";
+
 function App() {
   return (
     <>
@@ -5,21 +11,19 @@ function App() {
         <div>
           <img src="src/assets/logo.svg" alt="Logo de DevJobs" />
           <h1>DevJobs</h1>
-          <nav>
-            <a href="">Inicio</a>
-            <a href="#">Empleos</a>
-            <a href="">Empresas</a>
-            <a href="">Salarios</a>
-          </nav>
+          <NavLinks
+            links={[
+              { link: "", text: "Inicio" },
+              { link: "#", text: "Empleos" },
+              { link: "", text: "Empresas" },
+              { link: "", text: "Salarios" },
+            ]}
+          />
         </div>
 
         <div>
           <a href="">Subir CV</a>
-          <devjobs-avatar
-            service="x"
-            username="qv1ko"
-            size="32"
-          ></devjobs-avatar>
+          <DevJobsAvatar />
         </div>
       </header>
 
@@ -31,131 +35,77 @@ function App() {
           </header>
 
           <section className="form-section">
-            <form id="search-form" role="search">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-                <path d="M21 21l-6 -6" />
-              </svg>
-
-              <input
-                id="search-input"
-                required
-                type="text"
-                name="search"
-                placeholder="Buscar trabajos, empresas o habilidades"
-              />
-            </form>
+            <SearchBar placeholder="Buscar trabajos, empresas o habilidades" />
 
             <form id="filter" role="filter">
-              <select name="technology" id="technology-selector">
-                <option value="">Tecnología</option>
-                <option value="azure">Azure</option>
-                <option value="aws">AWS</option>
-                <option value="cs">C#</option>
-                <option value="c++">C++</option>
-                <option value="firewalls">Firewalls</option>
-                <option value="gcp">GCP</option>
-                <option value="js">JavaScript</option>
-                <option value="kotlin">Kotlin</option>
-                <option value="linux">Linux</option>
-                <option value="node.js">Node.js</option>
-                <option value="nosql">NoSQL</option>
-                <option value="python">Python</option>
-                <option value="r">R</option>
-                <option value="react">React</option>
-                <option value="sql">SQL</option>
-                <option value="swift">Swift</option>
-                <option value="unity">Unity</option>
-                <option value="unreal">Unreal Engine</option>
-                <option value="vue.js">Vue.js</option>
-                <option value="windows">Windows</option>
-              </select>
+              <FilterSelector
+                name="technology"
+                options={[
+                  { value: "", text: "Tecnología" },
+                  { value: "azure", text: "Azure" },
+                  { value: "aws", text: "AWS" },
+                  { value: "cs", text: "C#" },
+                  { value: "c++", text: "C++" },
+                  { value: "firewalls", text: "Firewalls" },
+                  { value: "gcp", text: "GCP" },
+                  { value: "js", text: "JavaScript" },
+                  { value: "kotlin", text: "Kotlin" },
+                  { value: "linux", text: "Linux" },
+                  { value: "node.js", text: "Node.js" },
+                  { value: "nosql", text: "NoSQL" },
+                  { value: "python", text: "Python" },
+                  { value: "r", text: "R" },
+                  { value: "react", text: "React" },
+                  { value: "sql", text: "SQL" },
+                  { value: "swift", text: "Swift" },
+                  { value: "unity", text: "Unity" },
+                  { value: "unreal", text: "Unreal Engine" },
+                  { value: "vue.js", text: "Vue.js" },
+                  { value: "windows", text: "Windows" },
+                ]}
+              />
 
-              <select name="location" id="location-selector">
-                <option value="">Ubicación</option>
-                <option value="mx">Ciudad de México</option>
-                <option value="mty">Monterrey</option>
-                <option value="hyb">Híbrido</option>
-                <option value="remote">Remoto</option>
-              </select>
+              <FilterSelector
+                name="location"
+                options={[
+                  { value: "", text: "Ubicación" },
+                  { value: "mx", text: "Ciudad de México" },
+                  { value: "mty", text: "Monterrey" },
+                  { value: "hyb", text: "Híbrido" },
+                  { value: "remote", text: "Remoto" },
+                ]}
+              />
 
-              <select name="contract_type" id="contract_type-selector">
-                <option value="">Tipo de contrato</option>
-                <option value="undefined">Indefinido</option>
-                <option value="replacement">Sustitución</option>
-                <option value="temporary">Temporal</option>
-              </select>
+              <FilterSelector
+                name="contract_type"
+                options={[
+                  { value: "", text: "Tipo de contrato" },
+                  { value: "undefined", text: "Indefinido" },
+                  { value: "replacement", text: "Sustitución" },
+                  { value: "temporary", text: "Temporal" },
+                ]}
+              />
 
-              <select name="experience" id="experience-selector">
-                <option value="">Nivel de experiencia</option>
-                <option value="2">2 años</option>
-                <option value="3">3 años</option>
-                <option value="4">4 años</option>
-                <option value="5">5 años</option>
-              </select>
+              <FilterSelector
+                name="experience"
+                options={[
+                  { value: "", text: "Nivel de experiencia" },
+                  { value: "2", text: "2 años" },
+                  { value: "3", text: "3 años" },
+                  { value: "4", text: "4 años" },
+                  { value: "5", text: "5 años" },
+                ]}
+              />
             </form>
           </section>
 
           <section className="results-section">
             <h2>Resultados de búsqueda</h2>
-
             <div className="results"></div>
           </section>
 
           <footer>
-            <nav className="pagination">
-              <a data-page="0">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M15 6l-6 6l6 6" />
-                </svg>
-              </a>
-              <a className="is_active" data-page="0">
-                1
-              </a>
-              <a data-page="1">2</a>
-              <a data-page="2">3</a>
-              <a data-page="3">4</a>
-              <a data-page="4">5</a>
-              <a>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <path d="M9 6l6 6l-6 6" />
-                </svg>
-              </a>
-            </nav>
+            <Pagination pages={[1, 2, 3, 4, 5]} />
           </footer>
         </section>
       </main>
