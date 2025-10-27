@@ -1,10 +1,15 @@
+import { useState } from "react";
+import data from "./assets/data.json";
 import { FilterSelector } from "./components/FilterSelector.jsx";
 import { DevJobsAvatar } from "./components/icons/DevJobsAvatar.jsx";
+import { JobCard } from "./components/JobCard.jsx";
 import { NavLinks } from "./components/NavLinks.jsx";
 import { Pagination } from "./components/Pagination.jsx";
 import { SearchBar } from "./components/SearchBar.jsx";
 
 function App() {
+  const [jobs] = useState(data);
+
   return (
     <>
       <header className="logged-header">
@@ -101,7 +106,17 @@ function App() {
 
           <section className="results-section">
             <h2>Resultados de búsqueda</h2>
-            <div className="results"></div>
+            <div className="results">
+              {jobs.map(({ title, company, location, description, data }) => (
+                <JobCard
+                  title={title}
+                  company={company}
+                  location={location}
+                  description={description}
+                  data={data}
+                />
+              ))}
+            </div>
           </section>
 
           <footer>

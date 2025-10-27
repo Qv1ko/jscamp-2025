@@ -1,0 +1,134 @@
+[
+  {
+    "title": "Ingeniero de Software",
+    "company": "Tech Solutions Inc.",
+    "location": "Remoto",
+    "description": "Buscamos un ingeniero de software con experiencia en desarrollo web y conocimientos en JavaScript, React y Node.js. El candidato ideal debe ser capaz de trabajar en equipo y tener buenas habilidades de comunicación.",
+    "data": {
+      "technologies": ["js", "react", "node.js"],
+      "modality": "remote",
+      "contract": "temporary",
+      "experience": "3"
+    }
+  },
+  {
+    "title": "Analista de Datos",
+    "company": "Data Driven Co.",
+    "location": "Ciudad de México",
+    "description": "Estamos buscando un analista de datos con experiencia en el manejo de grandes conjuntos de datos y herramientas de visualización. Se requiere conocimiento en SQL, Python y R.",
+    "data": {
+      "technologies": ["sql", "python", "r"],
+      "modality": "mx",
+      "contract": "undefined",
+      "experience": "2"
+    }
+  },
+  {
+    "title": "Desarrollador de Aplicaciones Móviles",
+    "company": "Mobile Apps Ltd.",
+    "location": "Guadalajara",
+    "description": "Buscamos un desarrollador de aplicaciones móviles con experiencia en iOS y/o Android. El candidato debe tener conocimientos en Swift, Kotlin y el desarrollo de interfaces de usuario.",
+    "data": {
+      "technologies": ["swift", "kotlin"],
+      "modality": "hyb",
+      "contract": "undefined",
+      "experience": "4"
+    }
+  },
+  {
+    "title": "Ingeniero de DevOps",
+    "company": "Cloud Services SA",
+    "location": "Remoto",
+    "description": "Estamos buscando un ingeniero de DevOps con experiencia en la gestión de infraestructuras en la nube, automatización de procesos y herramientas de integración continua. Se requiere conocimiento en AWS, Azure o GCP.",
+    "data": {
+      "technologies": ["aws", "azure", "gcp"],
+      "modality": "remote",
+      "contract": "replacement",
+      "experience": "5"
+    }
+  },
+  {
+    "title": "Especialista en Ciberseguridad",
+    "company": "SecureTech",
+    "location": "Monterrey",
+    "description": "Buscamos un especialista en ciberseguridad con experiencia en la protección de sistemas y redes. El candidato debe tener conocimientos en firewalls, detección de intrusiones y normativas de seguridad.",
+    "data": {
+      "technologies": ["firewalls"],
+      "modality": "mty",
+      "contract": "replacement",
+      "experience": "3"
+    }
+  },
+  {
+    "title": "Desarrollador Full Stack",
+    "company": "Innovatech",
+    "location": "Remoto",
+    "description": "Estamos buscando un desarrollador full stack con experiencia en tecnologías front-end y back-end. Se requiere conocimiento en JavaScript, HTML, CSS, Node.js y bases de datos SQL y NoSQL.",
+    "data": {
+      "technologies": ["js", "html", "css", "node.js", "sql", "nosql"],
+      "modality": "remote",
+      "contract": "undefined",
+      "experience": "4"
+    }
+  },
+  {
+    "title": "Administrador de Sistemas",
+    "company": "IT Solutions",
+    "location": "Puebla",
+    "description": "Buscamos un administrador de sistemas con experiencia en la gestión de servidores, redes y seguridad informática. El candidato debe tener conocimientos en Linux, Windows Server y virtualización.",
+    "data": {
+      "technologies": ["linux", "windows"],
+      "modality": "hyb",
+      "contract": "temporary",
+      "experience": "5"
+    }
+  },
+  {
+    "title": "Científico de Datos",
+    "company": "Analytics Pro",
+    "location": "Remoto",
+    "description": "Estamos buscando un científico de datos con experiencia en análisis estadístico, machine learning y visualización de datos. Se requiere conocimiento en Python, R y herramientas como Tableau o Power BI.",
+    "data": {
+      "technologies": ["python", "r"],
+      "modality": "remote",
+      "contract": "temporary",
+      "experience": "3"
+    }
+  },
+  {
+    "title": "Desarrollador de Juegos",
+    "company": "Game Studio",
+    "location": "Ciudad de México",
+    "description": "Buscamos un desarrollador de juegos con experiencia en motores de juego como Unity o Unreal Engine. El candidato debe tener conocimientos en C#, C++ y diseño de niveles.",
+    "data": {
+      "technologies": ["unity", "unreal", "cs", "c++"],
+      "modality": "mx",
+      "contract": "temporary",
+      "experience": "4"
+    }
+  },
+  {
+    "title": "Especialista en Inteligencia Artificial",
+    "company": "AI Innovations",
+    "location": "Remoto",
+    "description": "Estamos buscando un especialista en inteligencia artificial con experiencia en el desarrollo de modelos de machine learning y deep learning. Se requiere conocimiento en Python, TensorFlow y PyTorch.",
+    "data": {
+      "technologies": ["python"],
+      "modality": "remote",
+      "contract": "undefined",
+      "experience": "5"
+    }
+  },
+  {
+    "title": "Desarrollador Front-End",
+    "company": "Web Creators",
+    "location": "Querétaro",
+    "description": "Buscamos un desarrollador front-end con experiencia en la creación de interfaces de usuario atractivas y funcionales. El candidato debe tener conocimientos en HTML, CSS, JavaScript y frameworks como React o Vue.js.",
+    "data": {
+      "technologies": ["html", "css", "js", "react", "vue.js"],
+      "modality": "hyb",
+      "contract": "temporary",
+      "experience": "3"
+    }
+  }
+]
