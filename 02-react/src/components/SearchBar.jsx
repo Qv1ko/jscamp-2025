@@ -1,6 +1,6 @@
-import { Search } from "./icons/Search";
+import { Search } from "./icons/Search.jsx";
 
-export function SearchBar({ placeholder = "" }) {
+export function SearchBar({ placeholder = "", handleTextSearch }) {
   return (
     <form id="search-form" role="search">
       <Search />
@@ -11,6 +11,7 @@ export function SearchBar({ placeholder = "" }) {
         type="text"
         name="search"
         placeholder={placeholder}
+        onChange={handleTextSearch}
       />
     </form>
   );

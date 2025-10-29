@@ -442,46 +442,6 @@ h1+p {
       }
     }
   }
-
-  footer {
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-block: 2rem;
-
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
-        color: var(--text-muted);
-        text-decoration: none;
-        border-radius: 0.375rem;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover {
-          background: var(--primary-button-bg);
-        }
-
-        &:focus {
-          background: var(--primary-hover);
-        }
-
-        &.is_active {
-          background-color: var(--primary-light);
-          color: var(--text-primary);
-          pointer-events: none;
-        }
-
-        &:active {
-          transform: scale(0.9);
-        }
-      }
-    }
-  }
 }
 
 #offer-page {

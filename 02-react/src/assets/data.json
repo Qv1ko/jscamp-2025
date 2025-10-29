@@ -1,5 +1,6 @@
 [
   {
+    "id": "28d1a1e2-3f4b-11ec-8d3d-0242ac130003",
     "title": "Ingeniero de Software",
     "company": "Tech Solutions Inc.",
     "location": "Remoto",
@@ -12,6 +13,7 @@
     }
   },
   {
+    "id": "38d1a1e2-3f4b-11ec-8d3d-0242ac130004",
     "title": "Analista de Datos",
     "company": "Data Driven Co.",
     "location": "Ciudad de México",
@@ -24,6 +26,7 @@
     }
   },
   {
+    "id": "48d1a1e2-3f4b-11ec-8d3d-0242ac130005",
     "title": "Desarrollador de Aplicaciones Móviles",
     "company": "Mobile Apps Ltd.",
     "location": "Guadalajara",
@@ -36,6 +39,7 @@
     }
   },
   {
+    "id": "58d1a1e2-3f4b-11ec-8d3d-0242ac130006",
     "title": "Ingeniero de DevOps",
     "company": "Cloud Services SA",
     "location": "Remoto",
@@ -48,6 +52,7 @@
     }
   },
   {
+    "id": "68d1a1e2-3f4b-11ec-8d3d-0242ac130007",
     "title": "Especialista en Ciberseguridad",
     "company": "SecureTech",
     "location": "Monterrey",
@@ -60,6 +65,7 @@
     }
   },
   {
+    "id": "78d1a1e2-3f4b-11ec-8d3d-0242ac130008",
     "title": "Desarrollador Full Stack",
     "company": "Innovatech",
     "location": "Remoto",
@@ -72,6 +78,7 @@
     }
   },
   {
+    "id": "88d1a1e2-3f4b-11ec-8d3d-0242ac130009",
     "title": "Administrador de Sistemas",
     "company": "IT Solutions",
     "location": "Puebla",
@@ -84,6 +91,7 @@
     }
   },
   {
+    "id": "98d1a1e2-3f4b-11ec-8d3d-0242ac130010",
     "title": "Científico de Datos",
     "company": "Analytics Pro",
     "location": "Remoto",
@@ -96,6 +104,7 @@
     }
   },
   {
+    "id": "a8d1a1e2-3f4b-11ec-8d3d-0242ac130011",
     "title": "Desarrollador de Juegos",
     "company": "Game Studio",
     "location": "Ciudad de México",
@@ -108,6 +117,7 @@
     }
   },
   {
+    "id": "b8d1a1e2-3f4b-11ec-8d3d-0242ac130012",
     "title": "Especialista en Inteligencia Artificial",
     "company": "AI Innovations",
     "location": "Remoto",
@@ -120,6 +130,7 @@
     }
   },
   {
+    "id": "c8d1a1e2-3f4b-11ec-8d3d-0242ac130013",
     "title": "Desarrollador Front-End",
     "company": "Web Creators",
     "location": "Querétaro",
