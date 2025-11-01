@@ -1,3 +1,5 @@
+import styles from "./JobCard.module.css";
+
 import { useState } from "react";
 
 export function JobCard({ job }) {
@@ -10,7 +12,7 @@ export function JobCard({ job }) {
   const { title, company, location, description, data } = job;
 
   const text = isApplied ? "Aplicado" : "Aplicar";
-  const buttonClass = isApplied ? "is_applied" : "";
+  const buttonClass = isApplied ? styles.isApplied : "";
 
   return (
     <article

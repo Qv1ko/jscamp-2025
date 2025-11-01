@@ -1,0 +1,50 @@
+article {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--select-bg);
+
+    &:last-of-type {
+        border-bottom: 0;
+    }
+
+    h3 {
+        max-width: fit-content;
+        color: var(--text-primary);
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    small {
+        color: var(--text-muted);
+    }
+
+    p {
+        color: var(--text-secondary);
+        margin: 0.5rem 0;
+        width: 100ch;
+    }
+
+    button {
+        float: right;
+        padding: 0.75rem 1.5rem;
+        background: var(--primary);
+        color: var(--text-primary);
+        text-decoration: none;
+        border: 0;
+        border-radius: 0.5rem;
+
+        &:hover,
+        &:focus {
+            background: var(--primary-hover);
+            outline: 2px solid var(--text-primary);
+            outline-offset: 2px;
+            cursor: pointer;
+        }
+    }
+}
+
+.isApplied {
+    background: var(--applied-bg);
+    pointer-events: none;
+}
