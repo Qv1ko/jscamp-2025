@@ -1,23 +1,24 @@
-import { useState, useId } from "react";
+import { useId } from "react";
 import { FilterSelector } from "./FilterSelector.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
-export function SearchFormSection() {
+export function SearchFormSection({ onTextFilter, onSearch }) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
-  const idContactType = useId();
+  const idContract = useId();
   const idExperience = useId();
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
+
     const filters = {
-      technology: formData.idTechnology,
-      location: formData.idLocation,
-      contactType: formData.idContactType,
-      experience: formData.idExperience,
+      technology: formData.get(idTechnology),
+      location: formData.get(idLocation),
+      contract: formData.get(idContract),
+      experience: formData.get(idExperience),
     };
 
     onSearch(filters);
@@ -25,17 +26,36 @@ export function SearchFormSection() {
 
   const handleTextChange = (event) => {
     const text = event.target.value;
-    // onTextFilter()
+    onTextFilter(text);
+  };
+
+  const handleFilterChange = (event) => {
+    const formData = new FormData(event.currentTarget);
+
+    const filters = {
+      technology: formData.get(idTechnology),
+      location: formData.get(idLocation),
+      contract: formData.get(idContract),
+      experience: formData.get(idExperience),
+    };
+
+    onSearch(filters);
   };
 
   return (
     <section className="form-section">
       <SearchBar
         name={idText}
+        handleTextSearch={handleTextChange}
         placeholder="Buscar trabajos, empresas o habilidades"
       />
 
-      <form onSubmit={handleSubmit} id="filter" role="filter">
+      <form
+        onSubmit={handleSubmit}
+        onChange={handleFilterChange}
+        id="filter"
+        role="filter"
+      >
         <FilterSelector
           name={idTechnology}
           options={[
@@ -75,7 +95,7 @@ export function SearchFormSection() {
         />
 
         <FilterSelector
-          name={idContactType}
+          name={idContract}
           options={[
             { value: "", text: "Tipo de contrato" },
             { value: "undefined", text: "Indefinido" },
