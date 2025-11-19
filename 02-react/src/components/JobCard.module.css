@@ -6,7 +6,7 @@ article {
         border-bottom: 0;
     }
 
-    h3 {
+    .jobCardTitle {
         max-width: fit-content;
         color: var(--text-primary);
 
@@ -19,7 +19,7 @@ article {
         color: var(--text-muted);
     }
 
-    p {
+    .jobCardDescription {
         color: var(--text-secondary);
         margin: 0.5rem 0;
         width: 100ch;

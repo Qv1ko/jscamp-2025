@@ -28,11 +28,11 @@ export function JobCard({ job }) {
       >
         {text}
       </button>
-      <h3 className="offer-link">{title}</h3>
+      <h3 className="jobCardTitle offer-link">{title}</h3>
       <small>
         {company} | {location}
       </small>
-      <p>{description}</p>
+      <p className="jobCardDescription">{description}</p>
     </article>
   );
 }

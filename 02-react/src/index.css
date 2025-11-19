@@ -133,11 +133,18 @@ h1+p {
     gap: 0.5rem;
     align-items: center;
 
-    h1 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin: 0;
-      color: var(--text-primary);
+    a {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      text-decoration: none;
+
+      h1 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--text-primary);
+      }
     }
 
     nav {
