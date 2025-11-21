@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { JobListing } from "../components/JobListing.jsx";
 import { Pagination } from "../components/Pagination.jsx";
@@ -55,6 +55,23 @@ export function SearchPage() {
     setTextToFilter(newTextToFilter);
     setCurrentPage(1);
   };
+
+  useEffect(() => {
+    document.title = `Resultados: ${jobsWithTextFilter.length}, Página ${currentPage} - DevJobs`;
+  }, [jobsWithTextFilter, currentPage]);
+
+  useEffect(() => {
+    // Suscripción a un evento
+    const handleResize = () => {
+      console.log("Ventana redimensionada");
+      console.log(window.innerHeight, window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Limpieza: se ejecuta antes de desmontar o antes de re-ejecutar
+    return () => window.removeEventListener("resize", handleResize);
+  });
 
   return (
     <main>
