@@ -1,12 +1,14 @@
+import { Link } from "./Link.jsx";
+
 export function NavLinks({ links }) {
   if (!links) return;
 
   return (
     <nav>
       {links.map(({ link, text }) => (
-        <a key={text.toLowerCase()} href={link}>
+        <Link key={text.toLowerCase()} href={link}>
           {text}
-        </a>
+        </Link>
       ))}
     </nav>
   );

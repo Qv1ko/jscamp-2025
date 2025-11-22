@@ -1,14 +1,15 @@
 import { DevJobsAvatar } from "./icons/DevJobsAvatar.jsx";
+import { Link } from "./Link.jsx";
 import { NavLinks } from "./NavLinks.jsx";
 
 export function Header() {
   return (
     <header className="logged-header">
       <div>
-        <a href="/">
+        <Link href="/">
           <img src="src/assets/logo.svg" alt="Logo de DevJobs" />
           <h1>DevJobs</h1>
-        </a>
+        </Link>
         <NavLinks
           links={[
             { link: "/", text: "Inicio" },

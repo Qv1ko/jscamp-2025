@@ -63,8 +63,8 @@ export function SearchPage() {
   useEffect(() => {
     // Suscripción a un evento
     const handleResize = () => {
-      console.log("Ventana redimensionada");
-      console.log(window.innerHeight, window.innerWidth);
+      console.info("Ventana redimensionada");
+      console.info(window.innerHeight, window.innerWidth);
     };
 
     window.addEventListener("resize", handleResize);
