@@ -1,13 +1,16 @@
-import { useId } from "react";
+import { useId, useState } from "react";
 import { FilterSelector } from "./FilterSelector.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 
-export function SearchFormSection({ onTextFilter, onSearch }) {
-  const idText = useId();
-  const idTechnology = useId();
-  const idLocation = useId();
-  const idContract = useId();
-  const idExperience = useId();
+const useSearchForm = ({
+  idTechnology,
+  idLocation,
+  idContract,
+  idExperience,
+  onSearch,
+  onTextFilter,
+}) => {
+  const [searchText, setSeachText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -26,6 +29,7 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
 
   const handleTextChange = (event) => {
     const text = event.target.value;
+    setSeachText(text);
     onTextFilter(text);
   };
 
@@ -41,6 +45,26 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
 
     onSearch(filters);
   };
+
+  return { searchText, handleSubmit, handleTextChange, handleFilterChange };
+};
+
+export function SearchFormSection({ onTextFilter, onSearch }) {
+  const idText = useId();
+  const idTechnology = useId();
+  const idLocation = useId();
+  const idContract = useId();
+  const idExperience = useId();
+
+  const { searchText, handleSubmit, handleTextChange, handleFilterChange } =
+    useSearchForm({
+      idTechnology,
+      idLocation,
+      idContract,
+      idExperience,
+      onSearch,
+      onTextFilter,
+    });
 
   return (
     <section className="form-section">
