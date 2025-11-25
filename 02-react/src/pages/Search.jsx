@@ -3,8 +3,6 @@ import { JobListing } from "../components/JobListing.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { SearchFormSection } from "../components/SearchFormSection.jsx";
 
-import jobsData from "../assets/data.json";
-
 const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
@@ -17,29 +15,31 @@ const useFilters = () => {
   const [textToFilter, setTextToFilter] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
-  const jobsFilteredByFilters = jobsData.filter((job) => {
-    return (
-      (filters.technology === "" ||
-        job.data.technologies.some((item) => item === filters.technology)) &&
-      (filters.location === "" || job.data.modality === filters.location) &&
-      (filters.contract === "" || job.data.contract === filters.contract) &&
-      (filters.experience === "" || job.data.experience === filters.experience)
-    );
-  });
+  const [jobs, setJobs] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(true);
 
-  const jobsWithTextFilter =
-    textToFilter === ""
-      ? jobsFilteredByFilters
-      : jobsFilteredByFilters.filter((job) => {
-          return job.title.toLowerCase().includes(textToFilter.toLowerCase());
-        });
+  useEffect(() => {
+    async function fetchJobs() {
+      try {
+        setLoading(true);
 
-  const totalPages = Math.ceil(jobsWithTextFilter.length / RESULTS_PER_PAGE);
+        const response = await fetch("https://jscamp-api.vercel.app/api/jobs");
+        const json = await response.json();
 
-  const pagedResults = jobsWithTextFilter.slice(
-    (currentPage - 1) * RESULTS_PER_PAGE,
-    currentPage * RESULTS_PER_PAGE
-  );
+        setJobs(json.data);
+        setTotal(json.total);
+      } catch (error) {
+        console.error("Error fetching jobs:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchJobs();
+  }, []);
+
+  const totalPages = Math.ceil(jobs.length / RESULTS_PER_PAGE);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -56,9 +56,10 @@ const useFilters = () => {
   };
 
   return {
-    jobsWithTextFilter,
+    jobs,
+    total,
+    loading,
     totalPages,
-    pagedResults,
     currentPage,
     handlePageChange,
     handleSearch,
@@ -68,9 +69,10 @@ const useFilters = () => {
 
 export function SearchPage() {
   const {
-    jobsWithTextFilter,
+    jobs,
+    total,
+    loading,
     totalPages,
-    pagedResults,
     currentPage,
     handlePageChange,
     handleSearch,
@@ -78,8 +80,8 @@ export function SearchPage() {
   } = useFilters();
 
   useEffect(() => {
-    document.title = `Resultados: ${jobsWithTextFilter.length}, Página ${currentPage} - DevJobs`;
-  }, [jobsWithTextFilter, currentPage]);
+    document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
+  }, [total, currentPage]);
 
   useEffect(() => {
     // Suscripción a un evento
@@ -108,7 +110,7 @@ export function SearchPage() {
         />
 
         <section className="results-section">
-          <JobListing jobs={pagedResults} />
+          {loading ? <p>Cargando empleos...</p> : <JobListing jobs={jobs} />}
         </section>
 
         <footer>

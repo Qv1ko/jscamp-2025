@@ -9,17 +9,17 @@ export function JobCard({ job }) {
     setIsApplied(true);
   }
 
-  const { title, company, location, description, data } = job;
+  const { titulo, empresa, ubicacion, descripcion, data } = job;
 
   const text = isApplied ? "Aplicado" : "Aplicar";
   const buttonClass = isApplied ? styles.isApplied : "";
 
   return (
     <article
-      data-technologies={data?.technologies}
-      data-modality={data?.modality}
-      data-contract={data?.contract}
-      data-experience={data?.experience}
+      data-technologies={data?.technology}
+      data-modality={data?.modalidad}
+      // data-contract={data?.contract}
+      data-experience={data?.nivel}
     >
       <button
         className={`button-apply-job ${buttonClass}`}
@@ -28,11 +28,11 @@ export function JobCard({ job }) {
       >
         {text}
       </button>
-      <h3 className="jobCardTitle offer-link">{title}</h3>
+      <h3 className="jobCardTitle offer-link">{titulo}</h3>
       <small>
-        {company} | {location}
+        {empresa} | {ubicacion}
       </small>
-      <p className="jobCardDescription">{description}</p>
+      <p className="jobCardDescription">{descripcion}</p>
     </article>
   );
 }
