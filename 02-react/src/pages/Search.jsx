@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { JobListing } from "../components/JobListing.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { SearchFormSection } from "../components/SearchFormSection.jsx";
@@ -8,7 +7,7 @@ import jobsData from "../assets/data.json";
 
 const RESULTS_PER_PAGE = 5;
 
-export function SearchPage() {
+const useFilters = () => {
   const [filters, setFilters] = useState({
     technology: "",
     location: "",
@@ -55,6 +54,28 @@ export function SearchPage() {
     setTextToFilter(newTextToFilter);
     setCurrentPage(1);
   };
+
+  return {
+    jobsWithTextFilter,
+    totalPages,
+    pagedResults,
+    currentPage,
+    handlePageChange,
+    handleSearch,
+    handleTextFilter,
+  };
+};
+
+export function SearchPage() {
+  const {
+    jobsWithTextFilter,
+    totalPages,
+    pagedResults,
+    currentPage,
+    handlePageChange,
+    handleSearch,
+    handleTextFilter,
+  } = useFilters();
 
   useEffect(() => {
     document.title = `Resultados: ${jobsWithTextFilter.length}, Página ${currentPage} - DevJobs`;
