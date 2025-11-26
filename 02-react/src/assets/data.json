@@ -8,7 +8,6 @@
     "data": {
       "technologies": ["js", "react", "node.js"],
       "modality": "remote",
-      "contract": "temporary",
       "experience": "3"
     }
   },
@@ -21,7 +20,6 @@
     "data": {
       "technologies": ["sql", "python", "r"],
       "modality": "mx",
-      "contract": "undefined",
       "experience": "2"
     }
   },
@@ -34,7 +32,6 @@
     "data": {
       "technologies": ["swift", "kotlin"],
       "modality": "hyb",
-      "contract": "undefined",
       "experience": "4"
     }
   },
@@ -47,7 +44,6 @@
     "data": {
       "technologies": ["aws", "azure", "gcp"],
       "modality": "remote",
-      "contract": "replacement",
       "experience": "5"
     }
   },
@@ -60,7 +56,6 @@
     "data": {
       "technologies": ["firewalls"],
       "modality": "mty",
-      "contract": "replacement",
       "experience": "3"
     }
   },
@@ -73,7 +68,6 @@
     "data": {
       "technologies": ["js", "html", "css", "node.js", "sql", "nosql"],
       "modality": "remote",
-      "contract": "undefined",
       "experience": "4"
     }
   },
@@ -86,7 +80,6 @@
     "data": {
       "technologies": ["linux", "windows"],
       "modality": "hyb",
-      "contract": "temporary",
       "experience": "5"
     }
   },
@@ -99,7 +92,6 @@
     "data": {
       "technologies": ["python", "r"],
       "modality": "remote",
-      "contract": "temporary",
       "experience": "3"
     }
   },
@@ -112,7 +104,6 @@
     "data": {
       "technologies": ["unity", "unreal", "cs", "c++"],
       "modality": "mx",
-      "contract": "temporary",
       "experience": "4"
     }
   },
@@ -125,7 +116,6 @@
     "data": {
       "technologies": ["python"],
       "modality": "remote",
-      "contract": "undefined",
       "experience": "5"
     }
   },
@@ -138,7 +128,6 @@
     "data": {
       "technologies": ["html", "css", "js", "react", "vue.js"],
       "modality": "hyb",
-      "contract": "temporary",
       "experience": "3"
     }
   }

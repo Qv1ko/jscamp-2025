@@ -5,7 +5,6 @@ import { SearchBar } from "./SearchBar.jsx";
 const useSearchForm = ({
   idTechnology,
   idLocation,
-  idContract,
   idExperience,
   onSearch,
   onTextFilter,
@@ -20,7 +19,6 @@ const useSearchForm = ({
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
-      contract: formData.get(idContract),
       experience: formData.get(idExperience),
     };
 
@@ -39,7 +37,6 @@ const useSearchForm = ({
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
-      contract: formData.get(idContract),
       experience: formData.get(idExperience),
     };
 
@@ -53,14 +50,12 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
-  const idContract = useId();
   const idExperience = useId();
 
   const { searchText, handleSubmit, handleTextChange, handleFilterChange } =
     useSearchForm({
       idTechnology,
       idLocation,
-      idContract,
       idExperience,
       onSearch,
       onTextFilter,
@@ -90,7 +85,7 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
             { value: "c++", text: "C++" },
             { value: "firewalls", text: "Firewalls" },
             { value: "gcp", text: "GCP" },
-            { value: "js", text: "JavaScript" },
+            { value: "javascript", text: "JavaScript" },
             { value: "kotlin", text: "Kotlin" },
             { value: "linux", text: "Linux" },
             { value: "node.js", text: "Node.js" },
@@ -111,20 +106,11 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
           name={idLocation}
           options={[
             { value: "", text: "Ubicación" },
-            { value: "mx", text: "Ciudad de México" },
-            { value: "mty", text: "Monterrey" },
-            { value: "hyb", text: "Híbrido" },
-            { value: "remote", text: "Remoto" },
-          ]}
-        />
-
-        <FilterSelector
-          name={idContract}
-          options={[
-            { value: "", text: "Tipo de contrato" },
-            { value: "undefined", text: "Indefinido" },
-            { value: "replacement", text: "Sustitución" },
-            { value: "temporary", text: "Temporal" },
+            { value: "cdmx", text: "Ciudad de México" },
+            { value: "guadalajara", text: "Guadalajara" },
+            { value: "barcelona", text: "Barcelona" },
+            { value: "madrid", text: "Madrid" },
+            { value: "remoto", text: "Remoto" },
           ]}
         />
 
@@ -132,10 +118,9 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
           name={idExperience}
           options={[
             { value: "", text: "Nivel de experiencia" },
-            { value: "2", text: "2 años" },
-            { value: "3", text: "3 años" },
-            { value: "4", text: "4 años" },
-            { value: "5", text: "5 años" },
+            { value: "senior", text: "Senior" },
+            { value: "mid-level", text: "Mid Level" },
+            { value: "junior", text: "Junior" },
           ]}
         />
       </form>

@@ -18,7 +18,6 @@ export function JobCard({ job }) {
     <article
       data-technologies={data?.technology}
       data-modality={data?.modalidad}
-      // data-contract={data?.contract}
       data-experience={data?.nivel}
     >
       <button
