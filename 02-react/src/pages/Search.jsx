@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { JobListing } from "../components/JobListing.jsx";
+import { Loader } from "../components/Loader.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { SearchFormSection } from "../components/SearchFormSection.jsx";
 
@@ -17,6 +18,21 @@ const useFilters = () => {
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  const hasActiveFilters =
+    textToFilter ||
+    filters.technology ||
+    filters.location ||
+    filters.experience;
+
+  const handleClearFilters = () => {
+    setTextToFilter("");
+    setFilters({
+      technology: "",
+      location: "",
+      experience: "",
+    });
+  };
 
   useEffect(() => {
     async function fetchJobs() {
@@ -77,6 +93,8 @@ const useFilters = () => {
     handlePageChange,
     handleSearch,
     handleTextFilter,
+    hasActiveFilters,
+    handleClearFilters,
   };
 };
 
@@ -90,6 +108,8 @@ export function SearchPage() {
     handlePageChange,
     handleSearch,
     handleTextFilter,
+    hasActiveFilters,
+    handleClearFilters,
   } = useFilters();
 
   useEffect(() => {
@@ -120,19 +140,26 @@ export function SearchPage() {
         <SearchFormSection
           onSearch={handleSearch}
           onTextFilter={handleTextFilter}
+          hasActiveFilters={hasActiveFilters}
+          onClearFilters={handleClearFilters}
         />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <section className="results-section">
+              <JobListing jobs={jobs} />
+            </section>
 
-        <section className="results-section">
-          {loading ? <p>Cargando empleos...</p> : <JobListing jobs={jobs} />}
-        </section>
-
-        <footer>
-          <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageChange={handlePageChange}
-          />
-        </footer>
+            <footer>
+              <Pagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={handlePageChange}
+              />
+            </footer>
+          </>
+        )}
       </section>
     </main>
   );

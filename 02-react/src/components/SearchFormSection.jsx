@@ -1,6 +1,7 @@
 import { useId, useState } from "react";
 import { FilterSelector } from "./FilterSelector.jsx";
 import { SearchBar } from "./SearchBar.jsx";
+import { FilterOff } from "./icons/FilterOff.jsx";
 
 const useSearchForm = ({
   idTechnology,
@@ -46,7 +47,12 @@ const useSearchForm = ({
   return { searchText, handleSubmit, handleTextChange, handleFilterChange };
 };
 
-export function SearchFormSection({ onTextFilter, onSearch }) {
+export function SearchFormSection({
+  onTextFilter,
+  onSearch,
+  hasActiveFilters,
+  onClearFilters,
+}) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
@@ -59,6 +65,7 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
       idExperience,
       onSearch,
       onTextFilter,
+      hasActiveFilters,
     });
 
   return (
@@ -123,6 +130,11 @@ export function SearchFormSection({ onTextFilter, onSearch }) {
             { value: "junior", text: "Junior" },
           ]}
         />
+        {hasActiveFilters && (
+          <button onClick={onClearFilters}>
+            <FilterOff />
+          </button>
+        )}
       </form>
     </section>
   );
