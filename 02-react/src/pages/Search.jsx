@@ -112,9 +112,9 @@ export function SearchPage() {
     handleClearFilters,
   } = useFilters();
 
-  useEffect(() => {
-    document.title = `Resultados: ${total}, Página ${currentPage} - DevJobs`;
-  }, [total, currentPage]);
+  const title = loading
+    ? "Cargando... - DevJobs"
+    : `Resultados: ${total}, Página ${currentPage} - DevJobs`;
 
   useEffect(() => {
     // Suscripción a un evento
@@ -131,6 +131,11 @@ export function SearchPage() {
 
   return (
     <main>
+      <title>{title}</title>
+      <meta
+        name="description"
+        content="Explora miles de oprtunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs."
+      />
       <section className="search-section">
         <header>
           <h1>Encuentra tu próximo trabajo</h1>
