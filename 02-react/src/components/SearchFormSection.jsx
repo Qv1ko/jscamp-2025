@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { FilterSelector } from "./FilterSelector.jsx";
 import { SearchBar } from "./SearchBar.jsx";
 import { FilterOff } from "./icons/FilterOff.jsx";
@@ -7,15 +7,19 @@ const useSearchForm = ({
   idTechnology,
   idLocation,
   idExperience,
+  idText,
   onSearch,
   onTextFilter,
 }) => {
+  let timeoutId = useRef(null);
   const [searchText, setSeachText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
+
+    if (event.target.name === idText) return;
 
     const filters = {
       technology: formData.get(idTechnology),
@@ -28,8 +32,12 @@ const useSearchForm = ({
 
   const handleTextChange = (event) => {
     const text = event.target.value;
-    setSeachText(text);
-    onTextFilter(text);
+    setSeachText(text); // actualizamos el input inmediatamente
+
+    // DEBOUNCE: Cancelar el timeout anterior
+    if (timeoutId.current) clearTimeout(timeoutId.current);
+
+    timeoutId.current = setTimeout(() => onTextFilter(text), 500);
   };
 
   const handleFilterChange = (event) => {
@@ -63,6 +71,7 @@ export function SearchFormSection({
       idTechnology,
       idLocation,
       idExperience,
+      idText,
       onSearch,
       onTextFilter,
       hasActiveFilters,
@@ -73,6 +82,7 @@ export function SearchFormSection({
       <SearchBar
         name={idText}
         handleTextSearch={handleTextChange}
+        handleTextFilter={onTextFilter}
         placeholder="Buscar trabajos, empresas o habilidades"
       />
 
