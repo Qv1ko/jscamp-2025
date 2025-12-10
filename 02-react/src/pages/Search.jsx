@@ -3,17 +3,28 @@ import { JobListing } from "../components/JobListing.jsx";
 import { Loader } from "../components/Loader.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { SearchFormSection } from "../components/SearchFormSection.jsx";
+import { useRouter } from "../hooks/useRouter.jsx";
 
 const RESULTS_PER_PAGE = 5;
 
 const useFilters = () => {
-  const [filters, setFilters] = useState({
-    technology: "",
-    location: "",
-    experience: "",
+  const [filters, setFilters] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return {
+      technology: params.get("technology") || "",
+      location: params.get("type") || "",
+      experience: params.get("level") || "",
+    };
   });
-  const [textToFilter, setTextToFilter] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
+  const [textToFilter, setTextToFilter] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("text") || "";
+  });
+  const [currentPage, setCurrentPage] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    const page = params.get("page");
+    return page ? Number(page) : 1;
+  });
 
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
@@ -33,6 +44,8 @@ const useFilters = () => {
       experience: "",
     });
   };
+
+  const { navigateTo } = useRouter();
 
   useEffect(() => {
     async function fetchJobs() {
@@ -68,6 +81,23 @@ const useFilters = () => {
     fetchJobs();
   }, [filters, textToFilter, currentPage]);
 
+  useEffect(() => {
+    const params = new URLSearchParams();
+
+    if (textToFilter) params.append("text", textToFilter);
+    if (filters.technology) params.append("technology", filters.technology);
+    if (filters.location) params.append("type", filters.location);
+    if (filters.experience) params.append("level", filters.experience);
+
+    if (currentPage > 1) params.append("page", currentPage);
+
+    const newUrl = params.toString()
+      ? `${window.location.pathname}?${params.toString()}`
+      : window.location.pathname;
+
+    navigateTo(newUrl);
+  }, [filters, currentPage, textToFilter, navigateTo]);
+
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
 
   const handlePageChange = (page) => {
@@ -90,6 +120,8 @@ const useFilters = () => {
     loading,
     totalPages,
     currentPage,
+    textToFilter,
+    filters,
     handlePageChange,
     handleSearch,
     handleTextFilter,
@@ -105,6 +137,8 @@ export function SearchPage() {
     loading,
     totalPages,
     currentPage,
+    textToFilter,
+    filters,
     handlePageChange,
     handleSearch,
     handleTextFilter,
@@ -143,6 +177,8 @@ export function SearchPage() {
         </header>
 
         <SearchFormSection
+          initialText={textToFilter}
+          initialFilters={filters}
           onSearch={handleSearch}
           onTextFilter={handleTextFilter}
           hasActiveFilters={hasActiveFilters}

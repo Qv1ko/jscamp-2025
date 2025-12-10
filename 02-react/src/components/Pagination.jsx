@@ -24,10 +24,16 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
     if (page !== currentPage) onPageChange(page);
   };
 
+  const buildPageUrl = (page) => {
+    const url = new URL(window.location);
+    url.searchParams.set("page", page);
+    return `${url.pathname}?${url.searchParams.toString()}`;
+  };
+
   return (
     <nav className={styles.pagination}>
       {!isFirstPage && (
-        <a href="#" onClick={handlePrevClick}>
+        <a href={buildPageUrl(currentPage - 1)} onClick={handlePrevClick}>
           <ChevronLeft />
         </a>
       )}
@@ -36,7 +42,7 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
         return (
           <a
             key={page}
-            href="#"
+            href={buildPageUrl(page)}
             className={currentPage === page ? styles.isActive : ""}
             onClick={(event) => handleChangePage(event, page)}
           >
@@ -46,7 +52,7 @@ export function Pagination({ currentPage = 1, totalPages = 10, onPageChange }) {
       })}
 
       {!isLastPage && (
-        <a onClick={handleNextClick}>
+        <a href={buildPageUrl(currentPage + 1)} onClick={handleNextClick}>
           <ChevronRight />
         </a>
       )}

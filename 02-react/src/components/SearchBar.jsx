@@ -6,6 +6,7 @@ import { SquareX } from "./icons/SquareX.jsx";
 
 export function SearchBar({
   placeholder = "",
+  initialText,
   handleTextSearch,
   handleTextFilter,
 }) {
@@ -43,6 +44,7 @@ export function SearchBar({
         name="search"
         ref={inputRef}
         placeholder={placeholder}
+        defaultValue={initialText}
         onChange={handleTextSearch}
         onFocus={handleSearchFocus}
         onBlur={handleSearchValidation}

@@ -58,6 +58,8 @@ const useSearchForm = ({
 export function SearchFormSection({
   onTextFilter,
   onSearch,
+  initialText,
+  initialFilters,
   hasActiveFilters,
   onClearFilters,
 }) {
@@ -66,21 +68,21 @@ export function SearchFormSection({
   const idLocation = useId();
   const idExperience = useId();
 
-  const { searchText, handleSubmit, handleTextChange, handleFilterChange } =
-    useSearchForm({
-      idTechnology,
-      idLocation,
-      idExperience,
-      idText,
-      onSearch,
-      onTextFilter,
-      hasActiveFilters,
-    });
+  const { handleSubmit, handleTextChange, handleFilterChange } = useSearchForm({
+    idTechnology,
+    idLocation,
+    idExperience,
+    idText,
+    onSearch,
+    onTextFilter,
+    hasActiveFilters,
+  });
 
   return (
     <section className="form-section">
       <SearchBar
         name={idText}
+        initialText={initialText}
         handleTextSearch={handleTextChange}
         handleTextFilter={onTextFilter}
         placeholder="Buscar trabajos, empresas o habilidades"
@@ -94,6 +96,7 @@ export function SearchFormSection({
       >
         <FilterSelector
           name={idTechnology}
+          initialValue={initialFilters.technology}
           options={[
             { value: "", text: "Tecnología" },
             { value: "azure", text: "Azure" },
@@ -121,6 +124,7 @@ export function SearchFormSection({
 
         <FilterSelector
           name={idLocation}
+          initialValue={initialFilters.location}
           options={[
             { value: "", text: "Ubicación" },
             { value: "cdmx", text: "Ciudad de México" },
@@ -133,6 +137,7 @@ export function SearchFormSection({
 
         <FilterSelector
           name={idExperience}
+          initialValue={initialFilters.experience}
           options={[
             { value: "", text: "Nivel de experiencia" },
             { value: "senior", text: "Senior" },
