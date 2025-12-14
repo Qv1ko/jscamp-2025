@@ -1,0 +1,4 @@
+.isActiveLink {
+    color: #1173d4 !important;
+    pointer-events: none;
+}

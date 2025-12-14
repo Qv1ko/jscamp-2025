@@ -1,0 +1,33 @@
+.loaderContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  z-index: 9999;
+}
+
+.loader {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: #076fe5;
+  box-shadow: 32px 0 #076fe5, -32px 0 #076fe5;
+  position: relative;
+  animation: flash 0.5s ease-out infinite alternate;
+  display: inline-block;
+}
+
+@keyframes flash {
+  0% {
+    background-color: rgba(7, 111, 229, 0.2);
+    box-shadow: 32px 0 rgba(7, 111, 229, 0.2), -32px 0 #076fe5;
+  }
+  50% {
+    background-color: #076fe5;
+    box-shadow: 32px 0 rgba(7, 111, 229, 0.2), -32px 0 rgba(7, 111, 229, 0.2);
+  }
+  100% {
+    background-color: rgba(7, 111, 229, 0.2);
+    box-shadow: 32px 0 #076fe5, -32px 0 rgba(7, 111, 229, 0.2);
+  }
+}
