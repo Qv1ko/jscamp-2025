@@ -8,10 +8,8 @@ export function useRouter() {
     navigate(path);
   }
 
-  const currentPath = location.pathname;
-
   return {
-    currentPath,
+    currentPath: location.pathname,
     navigateTo,
   };
 }

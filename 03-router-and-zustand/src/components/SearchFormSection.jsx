@@ -1,30 +1,29 @@
 import { useId, useRef, useState } from "react";
-import { FilterSelector } from "./FilterSelector.jsx";
-import { SearchBar } from "./SearchBar.jsx";
-import { FilterOff } from "./icons/FilterOff.jsx";
 
 const useSearchForm = ({
   idTechnology,
   idLocation,
-  idExperience,
+  idExperienceLevel,
   idText,
   onSearch,
   onTextFilter,
 }) => {
-  let timeoutId = useRef(null);
-  const [searchText, setSeachText] = useState("");
+  const timeoutId = useRef(null);
+  const [searchText, setSearchText] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
 
-    if (event.target.name === idText) return;
+    if (event.target.name === idText) {
+      return; // ya lo manejamos en onChange
+    }
 
     const filters = {
       technology: formData.get(idTechnology),
       location: formData.get(idLocation),
-      experience: formData.get(idExperience),
+      experienceLevel: formData.get(idExperienceLevel),
     };
 
     onSearch(filters);
@@ -32,125 +31,142 @@ const useSearchForm = ({
 
   const handleTextChange = (event) => {
     const text = event.target.value;
-    setSeachText(text); // actualizamos el input inmediatamente
+    setSearchText(text); // actualizamos el input inmediatamente
 
-    // DEBOUNCE: Cancelar el timeout anterior
-    if (timeoutId.current) clearTimeout(timeoutId.current);
+    // Debounce: Cancelar el timeout anterior
+    if (timeoutId.current) {
+      clearTimeout(timeoutId.current);
+    }
 
-    timeoutId.current = setTimeout(() => onTextFilter(text), 500);
+    timeoutId.current = setTimeout(() => {
+      onTextFilter(text);
+    }, 500);
   };
 
-  const handleFilterChange = (event) => {
-    const formData = new FormData(event.currentTarget);
-
-    const filters = {
-      technology: formData.get(idTechnology),
-      location: formData.get(idLocation),
-      experience: formData.get(idExperience),
-    };
-
-    onSearch(filters);
+  return {
+    searchText,
+    handleSubmit,
+    handleTextChange,
   };
-
-  return { searchText, handleSubmit, handleTextChange, handleFilterChange };
 };
 
 export function SearchFormSection({
+  initialFilters,
   onTextFilter,
   onSearch,
   initialText,
-  initialFilters,
-  hasActiveFilters,
-  onClearFilters,
 }) {
   const idText = useId();
   const idTechnology = useId();
   const idLocation = useId();
-  const idExperience = useId();
+  const idExperienceLevel = useId();
 
-  const { handleSubmit, handleTextChange, handleFilterChange } = useSearchForm({
+  const inputRef = useRef();
+
+  const { handleSubmit, handleTextChange } = useSearchForm({
     idTechnology,
     idLocation,
-    idExperience,
+    idExperienceLevel,
     idText,
     onSearch,
     onTextFilter,
-    hasActiveFilters,
   });
 
+  const handleClearInput = (event) => {
+    event.preventDefault();
+
+    inputRef.current.value = "";
+    onTextFilter("");
+  };
+
   return (
-    <section className="form-section">
-      <SearchBar
-        name={idText}
-        initialText={initialText}
-        handleTextSearch={handleTextChange}
-        handleTextFilter={onTextFilter}
-        placeholder="Buscar trabajos, empresas o habilidades"
-      />
+    <section className="jobs-search">
+      <h1>Encuentra tu próximo trabajo</h1>
+      <p>Explora miles de oportunidades en el sector tecnológico.</p>
 
-      <form
-        onSubmit={handleSubmit}
-        onChange={handleFilterChange}
-        id="filter"
-        role="filter"
-      >
-        <FilterSelector
-          name={idTechnology}
-          initialValue={initialFilters.technology}
-          options={[
-            { value: "", text: "Tecnología" },
-            { value: "azure", text: "Azure" },
-            { value: "aws", text: "AWS" },
-            { value: "cs", text: "C#" },
-            { value: "c++", text: "C++" },
-            { value: "firewalls", text: "Firewalls" },
-            { value: "gcp", text: "GCP" },
-            { value: "javascript", text: "JavaScript" },
-            { value: "kotlin", text: "Kotlin" },
-            { value: "linux", text: "Linux" },
-            { value: "node.js", text: "Node.js" },
-            { value: "nosql", text: "NoSQL" },
-            { value: "python", text: "Python" },
-            { value: "r", text: "R" },
-            { value: "react", text: "React" },
-            { value: "sql", text: "SQL" },
-            { value: "swift", text: "Swift" },
-            { value: "unity", text: "Unity" },
-            { value: "unreal", text: "Unreal Engine" },
-            { value: "vue.js", text: "Vue.js" },
-            { value: "windows", text: "Windows" },
-          ]}
-        />
+      <form onChange={handleSubmit} id="empleos-search-form" role="search">
+        <div className="search-bar">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="icon icon-tabler icons-tabler-outline icon-tabler-search"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
 
-        <FilterSelector
-          name={idLocation}
-          initialValue={initialFilters.location}
-          options={[
-            { value: "", text: "Ubicación" },
-            { value: "cdmx", text: "Ciudad de México" },
-            { value: "guadalajara", text: "Guadalajara" },
-            { value: "barcelona", text: "Barcelona" },
-            { value: "madrid", text: "Madrid" },
-            { value: "remoto", text: "Remoto" },
-          ]}
-        />
+          <input
+            ref={inputRef}
+            name={idText}
+            id="empleos-search-input"
+            type="text"
+            placeholder="Buscar trabajos, empresas o habilidades"
+            onChange={handleTextChange}
+            defaultValue={initialText}
+          />
 
-        <FilterSelector
-          name={idExperience}
-          initialValue={initialFilters.experience}
-          options={[
-            { value: "", text: "Nivel de experiencia" },
-            { value: "senior", text: "Senior" },
-            { value: "mid-level", text: "Mid Level" },
-            { value: "junior", text: "Junior" },
-          ]}
-        />
-        {hasActiveFilters && (
-          <button onClick={onClearFilters}>
-            <FilterOff />
-          </button>
-        )}
+          <button onClick={handleClearInput}>✖︎</button>
+        </div>
+
+        <div className="search-filters">
+          <select
+            name={idTechnology}
+            id="filter-technology"
+            defaultValue={initialFilters.technology}
+          >
+            <option value="">Tecnología</option>
+            <optgroup label="Tecnologías populares">
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+              <option value="react">React</option>
+              <option value="nodejs">Node.js</option>
+            </optgroup>
+            <option value="java">Java</option>
+            <hr />
+            <option value="csharp">C#</option>
+            <option value="c">C</option>
+            <option value="c++">C++</option>
+            <hr />
+            <option value="ruby">Ruby</option>
+            <option value="php">PHP</option>
+          </select>
+
+          <select
+            name={idLocation}
+            id="filter-location"
+            defaultValue={initialFilters.location}
+          >
+            <option value="">Ubicación</option>
+            <option value="remoto">Remoto</option>
+            <option value="cdmx">Ciudad de México</option>
+            <option value="guadalajara">Guadalajara</option>
+            <option value="monterrey">Monterrey</option>
+            <option value="barcelona">Barcelona</option>
+          </select>
+
+          <select
+            name={idExperienceLevel}
+            id="filter-experience-level"
+            defaultValue={initialFilters.experienceLevel}
+          >
+            <option value="">Nivel de experiencia</option>
+            <option value="junior">Junior</option>
+            <option value="mid">Mid-level</option>
+            <option value="senior">Senior</option>
+            <option value="lead">Lead</option>
+          </select>
+        </div>
       </form>
+
+      <span id="filter-selected-value"></span>
     </section>
   );
 }

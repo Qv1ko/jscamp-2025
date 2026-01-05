@@ -1,51 +1,36 @@
 import { useEffect, useState } from "react";
-import { JobListing } from "../components/JobListing.jsx";
-import { Loader } from "../components/Loader.jsx";
+import { useSearchParams } from "react-router";
+
+import { JobListings } from "../components/JobListings.jsx";
 import { Pagination } from "../components/Pagination.jsx";
 import { SearchFormSection } from "../components/SearchFormSection.jsx";
-import { useRouter } from "../hooks/useRouter.jsx";
+import styles from "./Search.module.css";
 
-const RESULTS_PER_PAGE = 5;
+const RESULTS_PER_PAGE = 4;
 
 const useFilters = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
+
   const [filters, setFilters] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
     return {
-      technology: params.get("technology") || "",
-      location: params.get("type") || "",
-      experience: params.get("level") || "",
+      technology: searchParams.get("technology") || "",
+      location: searchParams.get("type") || "",
+      experienceLevel: searchParams.get("level") || "",
     };
   });
-  const [textToFilter, setTextToFilter] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("text") || "";
-  });
+
+  const [textToFilter, setTextToFilter] = useState(
+    () => searchParams.get("text") || ""
+  );
+
   const [currentPage, setCurrentPage] = useState(() => {
-    const params = new URLSearchParams(window.location.search);
-    const page = params.get("page");
-    return page ? Number(page) : 1;
+    const page = Number(searchParams.get("page"));
+    return Number.isNaN(page) ? page : 1;
   });
 
   const [jobs, setJobs] = useState([]);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(true);
-
-  const hasActiveFilters =
-    textToFilter ||
-    filters.technology ||
-    filters.location ||
-    filters.experience;
-
-  const handleClearFilters = () => {
-    setTextToFilter("");
-    setFilters({
-      technology: "",
-      location: "",
-      experience: "",
-    });
-  };
-
-  const { navigateTo } = useRouter();
 
   useEffect(() => {
     async function fetchJobs() {
@@ -56,7 +41,8 @@ const useFilters = () => {
         if (textToFilter) params.append("text", textToFilter);
         if (filters.technology) params.append("technology", filters.technology);
         if (filters.location) params.append("type", filters.location);
-        if (filters.experience) params.append("level", filters.experience);
+        if (filters.experienceLevel)
+          params.append("level", filters.experienceLevel);
 
         const offset = (currentPage - 1) * RESULTS_PER_PAGE;
         params.append("limit", RESULTS_PER_PAGE);
@@ -79,24 +65,23 @@ const useFilters = () => {
     }
 
     fetchJobs();
-  }, [filters, textToFilter, currentPage]);
+  }, [filters, currentPage, textToFilter]);
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    setSearchParams(() => {
+      // Clear all existing params
+      const params = new URLSearchParams();
+      // Add only needed params
+      if (textToFilter) params.set("text", textToFilter);
+      if (filters.technology) params.set("technology", filters.technology);
+      if (filters.location) params.set("type", filters.location);
+      if (filters.experienceLevel) params.set("level", filters.experienceLevel);
 
-    if (textToFilter) params.append("text", textToFilter);
-    if (filters.technology) params.append("technology", filters.technology);
-    if (filters.location) params.append("type", filters.location);
-    if (filters.experience) params.append("level", filters.experience);
+      if (currentPage > 1) params.set("page", currentPage);
 
-    if (currentPage > 1) params.append("page", currentPage);
-
-    const newUrl = params.toString()
-      ? `${window.location.pathname}?${params.toString()}`
-      : window.location.pathname;
-
-    navigateTo(newUrl);
-  }, [filters, currentPage, textToFilter, navigateTo]);
+      return params;
+    });
+  }, [filters, currentPage, textToFilter, setSearchParams]);
 
   const totalPages = Math.ceil(total / RESULTS_PER_PAGE);
 
@@ -115,92 +100,61 @@ const useFilters = () => {
   };
 
   return {
+    filters,
+    loading,
     jobs,
     total,
-    loading,
     totalPages,
     currentPage,
     textToFilter,
-    filters,
     handlePageChange,
     handleSearch,
     handleTextFilter,
-    hasActiveFilters,
-    handleClearFilters,
   };
 };
 
-export function SearchPage() {
+export default function SearchPage() {
   const {
+    filters,
     jobs,
     total,
     loading,
     totalPages,
     currentPage,
     textToFilter,
-    filters,
     handlePageChange,
     handleSearch,
     handleTextFilter,
-    hasActiveFilters,
-    handleClearFilters,
   } = useFilters();
 
   const title = loading
-    ? "Cargando... - DevJobs"
+    ? `Cargando... - DevJobs`
     : `Resultados: ${total}, Página ${currentPage} - DevJobs`;
-
-  useEffect(() => {
-    // Suscripción a un evento
-    const handleResize = () => {
-      console.info("Ventana redimensionada");
-      console.info(window.innerHeight, window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    // Limpieza: se ejecuta antes de desmontar o antes de re-ejecutar
-    return () => window.removeEventListener("resize", handleResize);
-  });
 
   return (
     <main>
       <title>{title}</title>
       <meta
         name="description"
-        content="Explora miles de oprtunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs."
+        content="Explora miles de oportunidades laborales en el sector tecnológico. Encuentra tu próximo empleo en DevJobs."
       />
-      <section className="search-section">
-        <header>
-          <h1>Encuentra tu próximo trabajo</h1>
-          <p>Explora miles de oportunidades en el sector tecnológico.</p>
-        </header>
 
-        <SearchFormSection
-          initialText={textToFilter}
-          initialFilters={filters}
-          onSearch={handleSearch}
-          onTextFilter={handleTextFilter}
-          hasActiveFilters={hasActiveFilters}
-          onClearFilters={handleClearFilters}
+      <SearchFormSection
+        initialText={textToFilter}
+        initialFilters={filters}
+        onSearch={handleSearch}
+        onTextFilter={handleTextFilter}
+      />
+
+      <section className={styles.searchResults}>
+        <h2 style={{ textAlign: "center" }}>Resultados de búsqueda</h2>
+
+        {loading ? <p>Cargando empleos...</p> : <JobListings jobs={jobs} />}
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
         />
-        {loading ? (
-          <Loader />
-        ) : (
-          <>
-            <section className="results-section">
-              <JobListing jobs={jobs} />
-            </section>
-
-            <footer>
-              <Pagination
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </footer>
-          </>
-        )}
       </section>
     </main>
   );
