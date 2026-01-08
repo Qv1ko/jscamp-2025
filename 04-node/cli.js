@@ -25,12 +25,25 @@ const entries = Promise.all(
   })
 );
 
-// TODO sort
-// 1. Primero carpetas
-// 2. Orden alfabetico
-// 3. Tener encuenta flags como --files-only o --dirs-only
+const sortedEntries = (await entries).sort((a, b) => {
+  if (a.isDir && !b.isDir) return -1;
+  if (!a.isDir && b.isDir) return 1;
+  return a.name.localeCompare(b.name);
+});
 
-for (const entry of await entries) {
+const filterEntries = sortedEntries.filter((entry) => {
+  const args = process.argv.slice(2);
+  const filesOnly = args.includes("--files-only");
+  const dirsOnly = args.includes("--dirs-only");
+
+  if (filesOnly && !entry.isDir) return true;
+  if (dirsOnly && entry.isDir) return true;
+  if (!filesOnly && !dirsOnly) return true;
+
+  return false;
+});
+
+for (const entry of filterEntries) {
   const icon = entry.isDir ? "📁" : "📄";
   const size = entry.isDir ? "-" : entry.size;
 
