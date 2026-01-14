@@ -87,7 +87,7 @@ export default function JobDetail() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`https://jscamp-api.vercel.app/api/jobs/${jobId}`)
+    fetch(`https://localhost:1234/jobs/${jobId}`)
       .then((response) => {
         if (!response.ok) {
           navigate("/not-found");
