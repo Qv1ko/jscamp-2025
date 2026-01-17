@@ -1,20 +1,22 @@
-import cors from 'cors';
+import cors from "cors";
 import crypto from "crypto";
 import express from "express";
-import { DEFAULTS } from './config.js';
+import { DEFAULTS } from "./config.js";
 import jobs from "./jobs.json" with { type: "json" };
 
 const PORT = process.env.PORT || DEFAULTS.PORT;
 const app = express();
 
-app.use(cors({
-  origin: (origin, callback) => {
-    if (DEFAULTS.ACCEPTED_ORIGINS.includes(origin) || !origin) {
-      callback(null, true);
-    }
-    return callback(new Error('Origen no permitido'));
-  }
-}));
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (DEFAULTS.ACCEPTED_ORIGINS.includes(origin) || !origin) {
+        callback(null, true);
+      }
+      return callback(new Error("Origen no permitido"));
+    },
+  }),
+);
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -34,7 +36,14 @@ app.get("/health", (req, res) => {
 // CRUD: Create, Read, Update, Delete
 
 app.get("/jobs", (req, res) => {
-  const { limit = DEFAULTS.LIMIT, offset = DEFAULTS.OFFSET, text, title, technology, level } = req.query;
+  const {
+    limit = DEFAULTS.LIMIT,
+    offset = DEFAULTS.OFFSET,
+    text,
+    title,
+    technology,
+    level,
+  } = req.query;
 
   let filteredJobs = jobs;
 
@@ -43,28 +52,28 @@ app.get("/jobs", (req, res) => {
     filteredJobs = filteredJobs.filter(
       (job) =>
         job.title.toLowerCase().includes(searchTerm) ||
-        job.description.toLowerCase().includes(searchTerm)
+        job.description.toLowerCase().includes(searchTerm),
     );
   }
 
   if (title) {
     const searchTerm = title.toLowerCase();
-    filteredJobs = filteredJobs.filter(
-      (job) => job.title.toLowerCase().includes(searchTerm)
+    filteredJobs = filteredJobs.filter((job) =>
+      job.title.toLowerCase().includes(searchTerm),
     );
   }
 
   if (technology) {
     const searchTerm = technology.toLowerCase();
-    filteredJobs = filteredJobs.filter(
-      (job) => job.technology.toLowerCase().includes(searchTerm)
+    filteredJobs = filteredJobs.filter((job) =>
+      job.technology.toLowerCase().includes(searchTerm),
     );
   }
 
   if (level) {
     const searchTerm = level.toLowerCase();
-    filteredJobs = filteredJobs.filter(
-      (job) => job.level.toLowerCase().includes(searchTerm)
+    filteredJobs = filteredJobs.filter((job) =>
+      job.level.toLowerCase().includes(searchTerm),
     );
   }
 
@@ -76,7 +85,11 @@ app.get("/jobs", (req, res) => {
     filteredJobs = filteredJobs.slice(Number.parseInt(offset));
   }
 
-  res.json({data: filteredJobs, paginated: { limit, offset }, total: filteredJobs.length});
+  res.json({
+    data: filteredJobs,
+    paginated: { limit, offset },
+    total: filteredJobs.length,
+  });
 });
 
 // Idempotente: porque el sistema queda igual si llamas varias veces
@@ -92,7 +105,7 @@ app.get("/jobs/:id", (req, res) => {
 });
 
 // NO ES Idempotente
-app.post('/jobs', (req, res) => {
+app.post("/jobs", (req, res) => {
   const { titulo, empresa, ubicacion, data } = req.body;
 
   const newJob = {
@@ -100,8 +113,8 @@ app.post('/jobs', (req, res) => {
     titulo,
     empresa,
     ubicacion,
-    data
-  }
+    data,
+  };
 
   jobs.push(newJob); // Insert en DB
 
@@ -109,17 +122,66 @@ app.post('/jobs', (req, res) => {
 });
 
 // Reemplazar un recurso completo
-app.put('/jobs/:id', (req, res) => {
-  // TODO
+app.put("/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const { titulo, empresa, ubicacion, data } = req.body;
+
+  const jobIndex = jobs.findIndex((job) => job.id === id);
+
+  if (jobIndex === -1) {
+    return res.status(404).json({ error: "Job not found" });
+  }
+
+  const updatedJob = {
+    id,
+    titulo,
+    empresa,
+    ubicacion,
+    data,
+  };
+
+  jobs[jobIndex] = updatedJob;
+
+  res.json(updatedJob);
 });
 
 // Actualizar parcialmente un recurso
-app.patch('/jobs/:id', (req, res) => {
-  // TODO
+app.patch("/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const { titulo, empresa, ubicacion, data } = req.body;
+
+  const jobIndex = jobs.findIndex((job) => job.id === id);
+
+  if (jobIndex === -1) {
+    return res.status(404).json({ error: "Job not found" });
+  }
+
+  const existingJob = jobs[jobIndex];
+
+  const updatedJob = {
+    ...existingJob,
+    titulo: titulo || existingJob.titulo,
+    empresa: empresa || existingJob.empresa,
+    ubicacion: ubicacion || existingJob.ubicacion,
+    data: data || existingJob.data,
+  };
+
+  jobs[jobIndex] = updatedJob;
+
+  res.json(updatedJob);
 });
 
-app.delete('/jobs/:id', (req, res) => {
-  // TODO
+app.delete("/jobs/:id", (req, res) => {
+  const { id } = req.params;
+  const jobIndex = jobs.findIndex((job) => job.id === id);
+
+  if (jobIndex === -1) {
+    return res.status(404).json({ error: "Job not found" });
+  }
+
+  jobs.splice(jobIndex, 1);
+
+  res.status(204).send();
 });
 
 app.listen(PORT, () => {
