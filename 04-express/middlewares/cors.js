@@ -6,9 +6,10 @@ export const corsMiddleware = ({
 } = {}) => {
   return cors({
     origin: (origin, callback) => {
-      if (DEFAULTS.ACCEPTED_ORIGINS.includes(origin) || !origin) {
+      if (acceptedOrigins.includes(origin) || !origin) {
         callback(null, true);
       }
+
       return callback(new Error("Origen no permitido"));
     },
   });

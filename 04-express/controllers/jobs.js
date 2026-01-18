@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import { DEFAULTS } from "../config.js";
 import { JobModel } from "../models/job.js";
 
@@ -11,9 +10,9 @@ export class JobController {
       title,
       technology,
       level,
-    } = req.params;
+    } = req.query;
 
-    const filteredJobs = await JobModel.getAll({
+    const paginatedJobs = await JobModel.getAll({
       limit,
       offset,
       text,
@@ -23,26 +22,23 @@ export class JobController {
     });
 
     res.json({
-      data: filteredJobs,
-      paginated: { limit, offset },
-      total: filteredJobs.length,
+      data: paginatedJobs,
+      total: paginatedJobs.length,
+      limit: limit,
+      offset: offset,
     });
   }
 
   static async getById(req, res) {
-    const { titulo, empresa, ubicacion, data } = req.body;
+    const { id } = req.params;
 
-    const newJob = {
-      id: crypto.randomUUID(),
-      titulo,
-      empresa,
-      ubicacion,
-      data,
-    };
+    const job = JobModel.getById(id);
 
-    jobs.push(newJob); // Insert en DB
+    if (!job) {
+      return res.status(404).json({ message: "Job not found" });
+    }
 
-    res.status(201).json(newJob);
+    res.status(201).json(job);
   }
 
   static async create(req, res) {
