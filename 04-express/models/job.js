@@ -109,6 +109,7 @@ export class JobModel {
 
   static async delete(id) {
     const jobIndex = jobs.findIndex((job) => job.id === id);
+
     if (jobIndex === -1) return null;
 
     return jobs.splice(jobIndex, 1)[0];
