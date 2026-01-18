@@ -54,7 +54,46 @@ export class JobController {
     res.status(201).json(newJob);
   }
 
-  static async update(req, res) {}
-  static async parcialUpdate(req, res) {}
-  static async delete(req, res) {}
+  static async update(req, res) {
+    const { id } = req.params;
+    const { titulo, empresa, ubicacion, data } = req.body;
+
+    const updatedJob = JobModel.update(id, {
+      titulo,
+      empresa,
+      ubicacion,
+      data,
+    });
+
+    if (!updatedJob) return notFound(res);
+    res.status(200).json(updatedJob);
+  }
+
+  static async parcialUpdate(req, res) {
+    const { id } = req.params;
+    const { titulo, empresa, ubicacion, data } = req.body;
+
+    const updatedJob = JobModel.parcialUpdate(id, {
+      titulo,
+      empresa,
+      ubicacion,
+      data,
+    });
+
+    if (!updatedJob) return notFound(res);
+    res.status(200).json(updatedJob);
+  }
+
+  static async delete(req, res) {
+    const { id } = req.params;
+
+    const deletedJob = JobModel.delete(id);
+
+    if (!deletedJob) return notFound(res);
+    res.status(200).json(deletedJob);
+  }
+
+  static notFound(res) {
+    return res.status(404).json({ message: "Job not found" });
+  }
 }

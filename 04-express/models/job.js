@@ -73,4 +73,44 @@ export class JobModel {
 
     return newJob;
   }
+
+  static async update(id, { titulo, empresa, ubicacion, data }) {
+    const jobIndex = jobs.findIndex((job) => job.id === id);
+
+    if (jobIndex === -1) return null;
+
+    const updatedJob = {
+      ...jobs[jobIndex],
+      titulo,
+      empresa,
+      ubicacion,
+      data,
+    };
+
+    jobs[jobIndex] = updatedJob;
+
+    return updatedJob;
+  }
+
+  static async parcialUpdate(id, updateData) {
+    const jobIndex = jobs.findIndex((job) => job.id === id);
+
+    if (jobIndex === -1) return null;
+
+    const updatedJob = {
+      ...jobs[jobIndex],
+      ...updateData,
+    };
+
+    jobs[jobIndex] = updatedJob;
+
+    return updatedJob;
+  }
+
+  static async delete(id) {
+    const jobIndex = jobs.findIndex((job) => job.id === id);
+    if (jobIndex === -1) return null;
+
+    return jobs.splice(jobIndex, 1)[0];
+  }
 }
