@@ -24,3 +24,25 @@ after(async () => {
     });
   });
 });
+
+describe("GET /jobs", () => {
+  test("debe responder con 200 y un array de trabajos", async () => {
+    const response = await fetch(`${BASE_URL}/jobs`);
+    assert.strictEqual(response.status, 200);
+
+    const json = await response.json();
+    assert.ok(Array.isArray(json.data), "La respuesta debe ser un array");
+  });
+
+  test("debe filtrar trabajos por tecnología", async () => {
+    const tech = "javascript";
+    const response = await fetch(`${BASE_URL}/jobs?technology=${tech}`);
+    assert.strictEqual(response.status, 200);
+
+    const json = await response.json();
+    assert.ok(
+      json.data.every((job) => job.data.technology.includes(tech)),
+      `Todos los trabajos deben incluir la tecnología ${tech}`,
+    );
+  });
+});
