@@ -32,7 +32,7 @@ export class JobModel {
     if (technology) {
       const searchTerm = technology.toLowerCase();
       filteredJobs = filteredJobs.filter((job) =>
-        job.data.technology.toLowerCase().includes(searchTerm),
+        job.data.technology.some((t) => t.toLowerCase().includes(searchTerm)),
       );
     }
 
@@ -46,7 +46,8 @@ export class JobModel {
     const limitNumber = Number.parseInt(limit);
     const offsetNumber = Number.parseInt(offset);
 
-    if (!isNaN(offsetNumber) || !isNaN(limitNumber)) {
+    let paginatedJobs = filteredJobs;
+    if (!isNaN(offsetNumber) && !isNaN(limitNumber)) {
       paginatedJobs = filteredJobs.slice(
         offsetNumber,
         offsetNumber + limitNumber,

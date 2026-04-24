@@ -32,19 +32,19 @@ export class JobController {
   static async getById(req, res) {
     const { id } = req.params;
 
-    const job = JobModel.getById(id);
+    const job = await JobModel.getById(id);
 
     if (!job) {
       return res.status(404).json({ message: "Job not found" });
     }
 
-    res.status(201).json(job);
+    res.status(200).json(job);
   }
 
   static async create(req, res) {
     const { titulo, empresa, ubicacion, data } = req.body;
 
-    const newJob = JobModel.create({
+    const newJob = await JobModel.create({
       titulo,
       empresa,
       ubicacion,
@@ -58,14 +58,14 @@ export class JobController {
     const { id } = req.params;
     const { titulo, empresa, ubicacion, data } = req.body;
 
-    const updatedJob = JobModel.update(id, {
+    const updatedJob = await JobModel.update(id, {
       titulo,
       empresa,
       ubicacion,
       data,
     });
 
-    if (!updatedJob) return notFound(res);
+    if (!updatedJob) return JobController.notFound(res);
     res.status(200).json(updatedJob);
   }
 
@@ -73,7 +73,7 @@ export class JobController {
     const { id } = req.params;
     const { titulo, empresa, ubicacion, data } = req.body;
 
-    const updatedJob = JobModel.parcialUpdate(id, {
+    const updatedJob = await JobModel.parcialUpdate(id, {
       titulo,
       empresa,
       ubicacion,
@@ -87,10 +87,10 @@ export class JobController {
   static async delete(req, res) {
     const { id } = req.params;
 
-    const deletedJob = JobModel.delete(id);
+    const deletedJob = await JobModel.delete(id);
 
     if (!deletedJob) return notFound(res);
-    res.status(200).json(deletedJob);
+    res.status(204).send();
   }
 
   static notFound(res) {

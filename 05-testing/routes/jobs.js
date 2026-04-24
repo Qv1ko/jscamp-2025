@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { JobController } from "../controllers/jobs";
 
-const jobsRouter = Router();
+export default jobsRouter;
 
 jobsRouter.get("/", JobController.getAll);
 jobsRouter.get("/:id", JobController.getById);

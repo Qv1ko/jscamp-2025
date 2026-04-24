@@ -46,3 +46,109 @@ describe("GET /jobs", () => {
     );
   });
 });
+
+describe("POST /jobs", () => {
+  test("debe crear un nuevo trabajo y responder con 201", async () => {
+    const newJob = {
+      titulo: "Backend Developer",
+      empresa: "Tech Company",
+      ubicacion: "Remote",
+      data: {
+        technology: ["nodejs", "express"],
+        modalidad: "full-time",
+        nivel: "mid",
+      },
+    };
+
+    const response = await fetch(`${BASE_URL}/jobs`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newJob),
+    });
+    assert.strictEqual(response.status, 201);
+  });
+});
+
+describe("GET /jobs/:id", () => {
+  test("debe responder con 404 para un ID no existente", async () => {
+    const response = await fetch(`${BASE_URL}/jobs/bad-id`);
+    assert.strictEqual(response.status, 404);
+  });
+});
+
+describe("PUT /jobs/:id", () => {
+  test("debe actualizar un trabajo existente y responder con 200", async () => {
+    const newJob = {
+      titulo: "Frontend Developer",
+      empresa: "Design Company",
+      ubicacion: "Remote",
+      data: {
+        technology: ["react", "css"],
+        modalidad: "full-time",
+        nivel: "junior",
+      },
+    };
+
+    const createResponse = await fetch(`${BASE_URL}/jobs`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newJob),
+    });
+    const createdJob = await createResponse.json();
+    const jobId = createdJob.id;
+
+    const updatedData = {
+      titulo: "Senior Frontend Developer",
+      empresa: "Design Company",
+      ubicacion: "Remote",
+      data: {
+        technology: ["react", "css", "typescript"],
+        modalidad: "full-time",
+        nivel: "senior",
+      },
+    };
+    const updateResponse = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(updatedData),
+    });
+    assert.strictEqual(updateResponse.status, 200);
+
+    const updatedJob = await updateResponse.json();
+    assert.strictEqual(updatedJob.titulo, updatedData.titulo);
+    assert.deepStrictEqual(
+      updatedJob.data.technology,
+      updatedData.data.technology,
+    );
+  });
+});
+
+describe("DELETE /jobs/:id", () => {
+  test("debe eliminar un trabajo existente y responder con 204", async () => {
+    const newJob = {
+      titulo: "QA Engineer",
+      empresa: "Testing Company",
+      ubicacion: "Remote",
+      data: {
+        technology: ["automation", "manual"],
+        modalidad: "full-time",
+        nivel: "mid",
+      },
+    };
+
+    const createResponse = await fetch(`${BASE_URL}/jobs`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newJob),
+    });
+    assert.strictEqual(createResponse.status, 201);
+
+    const createdJob = await createResponse.json();
+    const jobId = createdJob.id;
+
+    const deleteResponse = await fetch(`${BASE_URL}/jobs/${jobId}`, {
+      method: "DELETE",
+    });
+    assert.strictEqual(deleteResponse.status, 204);
+  });
+});
