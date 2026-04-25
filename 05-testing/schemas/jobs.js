@@ -13,7 +13,7 @@ const JobSchema = z.object({
   ubicacion: z.string(),
   descripcion: z.string().optional(),
   data: z.object({
-    technology: z.array(z.string()),
+    technology: z.array(z.string().lowercase()),
     modalidad: z.string(),
     nivel: z.string(),
   }),
