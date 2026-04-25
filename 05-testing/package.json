@@ -13,6 +13,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.2.1",
-    "vercel": "^50.12.3"
+    "vercel": "^52.0.0",
+    "zod": "^4.3.6"
   }
 }
