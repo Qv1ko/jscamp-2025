@@ -1,19 +1,29 @@
 // @ts-check
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+// 1. Lo más recomendable es usar roles y aria
+// 2. etiquetas de texto, placeholders, nombres
+// 3. data-testid
+// 4. selectores de CSS como último recurso
+test("buscar empleos y aplicar a una oferta", async ({ page }) => {
+  await page.goto("http://localhost:5173");
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  const searchInput = page.getByRole("searchbox");
+  await searchInput.fill("React");
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await page.getByRole("button", { name: "Buscar" }).click();
 
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
+  const jobCards = page.locator(".job-listing-card");
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  await expect(jobCards.first()).toBeVisible();
+
+  const firstJobTitle = await jobCards.first().locator("h3");
+  await expect(firstJobTitle).toHaveText("Desarrollador de Software Senior");
+
+  await page.getByRole("button", { name: "Iniciar sesión" }).click();
+
+  const applyButton = page.getByRole("button", { name: "Aplicar" }).first();
+  await applyButton.click();
+
+  page.getByRole("button", { name: "Aplicado" }).first();
 });
