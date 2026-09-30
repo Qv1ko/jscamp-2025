@@ -1,4 +1,4 @@
-// JavaScript -> tipado dinamico y debil
+// JavaScript -> tipado dinamico y debil (conversiones implicitas)
 // function double(n) {
 //   return n * 2;
 // }
