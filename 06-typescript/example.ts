@@ -12,3 +12,5 @@ function double(n: number) {
 }
 
 double(10); // 20
+
+// TypeScript valida en tiempo de compilación, pero no en tiempo de ejecución
