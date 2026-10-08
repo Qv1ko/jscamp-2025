@@ -2,7 +2,6 @@ type Company = {
     name: string
     address: string
     phone?: string
-
 }
 
 type UserId = {
